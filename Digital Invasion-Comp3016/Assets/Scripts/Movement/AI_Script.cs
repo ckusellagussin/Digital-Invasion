@@ -28,7 +28,7 @@ public class AI_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -42,11 +42,25 @@ public class AI_Script : MonoBehaviour
                     if (path != null)
                     {
                         path = CalculatePath(endChunk);
-                        for(int i = 0; i < path.Count; i++)
+                        for (int i = 0; i < path.Count; i++)
                         {
                             path[i].gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
                         }
+                        MoveUnit(path);
                     }
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Unit"))
+                {
+                    aiEntity = hit.collider.gameObject;
                 }
             }
         }
@@ -54,7 +68,8 @@ public class AI_Script : MonoBehaviour
 
     private List<Chunk_Script> FindPath(GameObject endChunk)
     {
-        Ray ray = new Ray(aiEntity.transform.position, -aiEntity.transform.up);
+        Vector3 raycastPoint = new Vector3(0, 0.2f, 0);
+        Ray ray = new Ray(aiEntity.transform.position + raycastPoint, -aiEntity.transform.up);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
@@ -220,5 +235,10 @@ public class AI_Script : MonoBehaviour
         }
 
         return lowestFCostChunk;
+    }
+
+    private void MoveUnit(List<Chunk_Script> path)
+    {
+        aiEntity.GetComponent<AI_Follower_Script>().SetPath(path);
     }
 }

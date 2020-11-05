@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Chunk
+  - Tall Cover
+  - Unit
   layers:
   - Default
   - TransparentFX

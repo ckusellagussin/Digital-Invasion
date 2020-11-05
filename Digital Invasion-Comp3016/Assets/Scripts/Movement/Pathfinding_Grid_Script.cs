@@ -19,7 +19,7 @@ public class Pathfinding_Grid_Script : MonoBehaviour
             for (int j = -height + (height / 2); j <= height / 2; j++)
             {
                 GameObject temp = Instantiate(prefabChunk, transform);
-                temp.transform.position = new Vector3(i, -0.5f, j);
+                temp.transform.position = new Vector3(i, 0, j);
                 temp.GetComponent<Chunk_Script>().SetPositions(i, j);
                 chunksL.Add(temp.GetComponent<Chunk_Script>());
             }
