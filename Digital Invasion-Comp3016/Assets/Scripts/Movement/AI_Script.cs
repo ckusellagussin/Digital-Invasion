@@ -42,10 +42,6 @@ public class AI_Script : MonoBehaviour
                     if (path != null)
                     {
                         path = CalculatePath(endChunk);
-                        for (int i = 0; i < path.Count; i++)
-                        {
-                            path[i].gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
-                        }
                         MoveUnit(path);
                     }
                 }
