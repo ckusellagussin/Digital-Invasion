@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 3181059}
   - component: {fileID: 3181058}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Test Terrain
   m_TagString: Tall Cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 60149617}
   - component: {fileID: 60149616}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Test Terrain
   m_TagString: Tall Cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 974594683}
   - component: {fileID: 974594682}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Test Terrain
   m_TagString: Tall Cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 978034581}
   - component: {fileID: 978034580}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Test Terrain
   m_TagString: Tall Cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,8 +641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700fe962acf56854eb73dbc5effc1e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 20
-  height: 20
+  width: 30
+  height: 30
   prefabChunk: {fileID: 5295576268936032632, guid: af67ddbfdaca629408d9655ee78cc23b,
     type: 3}
   chunksL: []

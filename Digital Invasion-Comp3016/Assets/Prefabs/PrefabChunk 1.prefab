@@ -49,6 +49,7 @@ MonoBehaviour:
   gCost: 100
   hCost: 0
   fCost: 0
+  impassable: 0
   fromChunk: {fileID: 0}
 --- !u!1 &5295576269849868301
 GameObject:
