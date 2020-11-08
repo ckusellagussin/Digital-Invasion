@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4786896252321876258}
   m_Layer: 0
   m_Name: High_Wall
-  m_TagString: Untagged
+  m_TagString: Tall Cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

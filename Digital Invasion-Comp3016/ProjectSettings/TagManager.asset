@@ -7,6 +7,7 @@ TagManager:
   - Chunk
   - Tall Cover
   - Unit
+  - Low Cover
   layers:
   - Default
   - TransparentFX

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1492599227150762181}
   m_Layer: 0
   m_Name: Low_Wall
-  m_TagString: Untagged
+  m_TagString: Low Cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
