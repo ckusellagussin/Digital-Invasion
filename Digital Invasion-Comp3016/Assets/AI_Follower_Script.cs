@@ -25,7 +25,10 @@ public class AI_Follower_Script : MonoBehaviour
                 {
                     // Change target chunk to next chunk in path list
                     int currentIndex = path.IndexOf(targetChunk);
-                    targetChunk = path[currentIndex + 1];
+                    if (currentIndex + 1 < path.Count)
+                    {
+                        targetChunk = path[currentIndex + 1];
+                    }
                 }
                 else if (this.transform.position.x <= targetChunk.positionX + 0.1f && this.transform.position.x > targetChunk.positionX - 0.1f)
                 {
