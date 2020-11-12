@@ -8,6 +8,7 @@ public class Pathfinding_Grid_Script : MonoBehaviour
     public int height;
 
     public GameObject prefabChunk;
+    public AI_Script aiPathfinder;
     public List<Chunk_Script> chunksL;
 
     // Start is called before the first frame update
@@ -20,7 +21,7 @@ public class Pathfinding_Grid_Script : MonoBehaviour
             {
                 GameObject temp = Instantiate(prefabChunk, transform);
                 temp.transform.position = new Vector3(i, 0, j);
-                temp.GetComponent<Chunk_Script>().SetPositions(i, j);
+                temp.GetComponent<Chunk_Script>().SetPositions(i, j, aiPathfinder);
                 chunksL.Add(temp.GetComponent<Chunk_Script>());
             }
         }

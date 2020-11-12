@@ -37,7 +37,7 @@ public class AI_Script : MonoBehaviour
                 if (hit.collider.CompareTag("Chunk"))
                 {
                     SetGrid();
-                    endChunk = hit.collider.gameObject.transform.parent.GetComponent<Chunk_Script>();
+                    endChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
                     path = FindPath(endChunk.gameObject);
                     if (path != null)
                     {
@@ -62,6 +62,16 @@ public class AI_Script : MonoBehaviour
         }
     }
 
+    public void DistanceHighlight(GameObject newEndChunk)
+    {
+        SetGrid();
+        path = FindPath(newEndChunk);
+        if (path != null)
+        {
+            newEndChunk.GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+    }
+
     private List<Chunk_Script> FindPath(GameObject endChunk)
     {
         Vector3 raycastPoint = new Vector3(0, 0.2f, 0);
@@ -71,7 +81,7 @@ public class AI_Script : MonoBehaviour
         {
             if (hit.collider.CompareTag("Chunk"))
             {
-                startChunk = hit.collider.gameObject.transform.parent.GetComponent<Chunk_Script>();
+                startChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
             }
         }
 
@@ -84,7 +94,7 @@ public class AI_Script : MonoBehaviour
         startChunk.hCost = CalculateDistanceCost(startChunk, endChunk.GetComponent<Chunk_Script>());
         startChunk.CalcFCost();
 
-        while(openPath.Count> 0)
+        while(openPath.Count > 0)
         {
             Chunk_Script currentChunk = GetLowestFCost(openPath);
             if (currentChunk == endChunk.GetComponent<Chunk_Script>())
@@ -102,7 +112,7 @@ public class AI_Script : MonoBehaviour
                 if (neighbour != null)
                 {
                     int tentativeGCost = currentChunk.gCost + CalculateDistanceCost(currentChunk, neighbour);
-                    if (tentativeGCost < neighbour.gCost)
+                    if (tentativeGCost < neighbour.gCost && tentativeGCost <= aiEntity.GetComponent<AI_Follower_Script>().maxDistance)
                     {
                         neighbour.fromChunk = currentChunk;
                         neighbour.gCost = tentativeGCost;
@@ -118,7 +128,7 @@ public class AI_Script : MonoBehaviour
             }
         }
 
-        return closedPath;
+        return null;
     }
 
     private List<Chunk_Script> GetNeighbourList(Chunk_Script currentChunk)

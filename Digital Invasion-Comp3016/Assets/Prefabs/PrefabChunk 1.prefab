@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5295576268936032638}
   - component: {fileID: 5295576268936032633}
+  - component: {fileID: 2107512087636305069}
   m_Layer: 0
   m_Name: PrefabChunk 1
   m_TagString: Chunk
@@ -51,6 +52,20 @@ MonoBehaviour:
   fCost: 0
   impassable: 0
   fromChunk: {fileID: 0}
+  aiPathfinder: {fileID: 0}
+--- !u!65 &2107512087636305069
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295576268936032632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5295576269849868301
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +77,6 @@ GameObject:
   - component: {fileID: 5295576269849869298}
   - component: {fileID: 5295576269849869297}
   - component: {fileID: 5295576269849869296}
-  - component: {fileID: 5295576269849869299}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Chunk
@@ -133,16 +147,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5295576269849869299
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5295576269849868301}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

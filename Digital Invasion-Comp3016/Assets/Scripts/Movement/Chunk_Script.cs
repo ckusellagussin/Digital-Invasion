@@ -12,8 +12,11 @@ public class Chunk_Script : MonoBehaviour
     public int fCost;
 
     public bool impassable = false;
+    public bool lowCover = false;
+    public bool mouseOver = false;
 
     public Chunk_Script fromChunk;
+    public AI_Script aiPathfinder;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,10 @@ public class Chunk_Script : MonoBehaviour
             {
                 impassable = true;
             }
+            if (hit.collider.CompareTag("Low Cover"))
+            {
+                lowCover = true;
+            }
         }
     }
 
@@ -35,6 +42,26 @@ public class Chunk_Script : MonoBehaviour
         
     }
 
+    private void OnMouseOver()
+    {
+        if (mouseOver == false)
+        {
+            mouseOver = true;
+            Invoke("WaitTimer", 0.1f);
+        }
+    }
+    private void OnMouseExit()
+    {
+        mouseOver = false;
+        CancelInvoke("WaitTimer");
+        gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+    }
+
+    private void WaitTimer()
+    {
+        aiPathfinder.DistanceHighlight(gameObject);
+    }
+
     public void CalcFCost()
     {
         fCost = gCost + hCost;
@@ -42,11 +69,16 @@ public class Chunk_Script : MonoBehaviour
         {
             fCost = int.MaxValue;
         }
+        if (lowCover)
+        {
+            fCost += 15;
+        }
     }
 
-    public void SetPositions(int x, int z)
+    public void SetPositions(int x, int z, AI_Script pathfinder)
     {
         positionX = x;
         positionZ = z;
+        aiPathfinder = pathfinder;
     }
 }

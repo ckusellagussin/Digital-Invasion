@@ -7,6 +7,7 @@ public class AI_Follower_Script : MonoBehaviour
     public Chunk_Script currentChunk;
     public Chunk_Script targetChunk;
     public float speed;
+    public float maxDistance;
     [SerializeField]
     private List<Chunk_Script> path;
     private List<Chunk_Script> donePath;
