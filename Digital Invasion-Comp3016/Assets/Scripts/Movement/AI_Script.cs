@@ -45,6 +45,10 @@ public class AI_Script : MonoBehaviour
                         MoveUnit(path);
                     }
                 }
+                if(hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
+                {
+
+                }
             }
         }
 
@@ -114,14 +118,17 @@ public class AI_Script : MonoBehaviour
                     int tentativeGCost = currentChunk.gCost + CalculateDistanceCost(currentChunk, neighbour);
                     if (tentativeGCost < neighbour.gCost && tentativeGCost <= aiEntity.GetComponent<AI_Follower_Script>().maxDistance)
                     {
-                        neighbour.fromChunk = currentChunk;
-                        neighbour.gCost = tentativeGCost;
-                        neighbour.hCost = CalculateDistanceCost(neighbour, endChunk.GetComponent<Chunk_Script>());
-                        neighbour.CalcFCost();
-
-                        if (!openPath.Contains(neighbour))
+                        if (!neighbour.impassable)
                         {
-                            openPath.Add(neighbour);
+                            neighbour.fromChunk = currentChunk;
+                            neighbour.gCost = tentativeGCost;
+                            neighbour.hCost = CalculateDistanceCost(neighbour, endChunk.GetComponent<Chunk_Script>());
+                            neighbour.CalcFCost();
+
+                            if (!openPath.Contains(neighbour))
+                            {
+                                openPath.Add(neighbour);
+                            }
                         }
                     }
                 }

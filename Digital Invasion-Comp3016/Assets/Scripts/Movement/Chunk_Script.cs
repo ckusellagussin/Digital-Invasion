@@ -31,8 +31,11 @@ public class Chunk_Script : MonoBehaviour
             }
             if (hit.collider.CompareTag("Low Cover"))
             {
+                Debug.Log(hit.collider.tag);
                 lowCover = true;
             }
+
+            Debug.Log(hit.collider.tag);
         }
     }
 

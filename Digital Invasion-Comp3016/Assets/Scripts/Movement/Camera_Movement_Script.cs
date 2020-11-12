@@ -5,6 +5,11 @@ using UnityEngine;
 public class Camera_Movement_Script : MonoBehaviour
 {
     public int speed;
+    public Camera camera;
+
+    private bool waiting;
+    private int direction; //0 = left 1 = right
+    private float scroll;
 
     // Update is called once per frame
     void Update()
@@ -90,6 +95,49 @@ public class Camera_Movement_Script : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed * Time.deltaTime);
             }
+        }
+        if (Input.GetKey(KeyCode.Q) && !waiting)
+        {
+            waiting = true;
+            direction = 0;
+            Invoke("Rotate", 0.15f);
+        }
+        if (Input.GetKey(KeyCode.E) && !waiting)
+        {
+            waiting = true;
+            direction = 1;
+            Invoke("Rotate", 0.15f);
+        }
+
+        scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll > 0f)
+        {
+            if (camera.gameObject.transform.position.y > 3)
+            {
+                camera.gameObject.transform.position = Vector3.MoveTowards(camera.gameObject.transform.position, camera.gameObject.transform.position + camera.gameObject.transform.forward, speed * 2 * Time.deltaTime);
+            }
+        }
+        if (scroll < 0f)
+        {
+            if (camera.gameObject.transform.position.y < 9)
+            {
+                camera.gameObject.transform.position = Vector3.MoveTowards(camera.gameObject.transform.position, camera.gameObject.transform.position + -camera.gameObject.transform.forward, speed * 2 * Time.deltaTime);
+            }
+        }
+    }
+
+    void Rotate()
+    {
+        if (direction == 0)
+        {
+            waiting = false;
+            transform.Rotate(0, 90, 0);
+        }
+        if (direction == 1)
+        {
+            waiting = false;
+            transform.Rotate(0, -90, 0);
         }
     }
 }
