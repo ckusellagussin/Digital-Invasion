@@ -8,6 +8,7 @@ public class AI_Follower_Script : MonoBehaviour
     public Chunk_Script targetChunk;
     public float speed;
     public float maxDistance;
+    public float maxRange;
     [SerializeField]
     private List<Chunk_Script> path;
     private List<Chunk_Script> donePath;
@@ -98,5 +99,10 @@ public class AI_Follower_Script : MonoBehaviour
             targetChunk = path[0];
             endChunk = newPath[newPath.Count - 1];
         }
+    }
+
+    public void DealDamage(AI_Follower_Script target)
+    {
+        Destroy(gameObject);
     }
 }

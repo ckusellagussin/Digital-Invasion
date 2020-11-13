@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5981279493542713788}
   - component: {fileID: 5868119725759412713}
   - component: {fileID: 1492599227150762181}
+  - component: {fileID: 1216525948581983548}
   m_Layer: 0
   m_Name: Low_Wall
   m_TagString: Low Cover
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6459891819891829858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.495, y: 0.5, z: -7.47}
+  m_LocalPosition: {x: 18.495, y: 0, z: -7.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,5 +94,20 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.8, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &1216525948581983548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459891819891829858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed2ec023250f64408e183e3f91e0378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkUnder: {fileID: 0}
+  lowCoverPrefab: {fileID: 0}
+  yoffset: -0.2585

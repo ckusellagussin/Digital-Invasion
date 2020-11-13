@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_Script : MonoBehaviour
@@ -17,7 +16,14 @@ public class AI_Script : MonoBehaviour
 
     public Pathfinding_Grid_Script grid;
 
+    public GameObject cameraTrolley;
     public Camera mainCamera;
+
+    private GameObject selectedObject;
+    [SerializeField]
+    private Material_Container_Script materialContainer;
+    [SerializeField]
+    private Shooting_Script shooter;
 
     // Start is called before the first frame update
     void Start()
@@ -30,24 +36,48 @@ public class AI_Script : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            if (selectedObject != null)
+            {
+                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                selectedObject = null;
+            }
+
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.CompareTag("Chunk"))
                 {
                     SetGrid();
                     endChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
-                    path = FindPath(endChunk.gameObject);
-                    if (path != null)
-                    {
-                        path = CalculatePath(endChunk);
-                        MoveUnit(path);
-                    }
-                }
-                if(hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
-                {
 
+                    if (!endChunk.impassable && !endChunk.lowCover)
+                    {
+                        path = FindPath(endChunk.gameObject);
+                        if (path != null)
+                        {
+                            path = CalculatePath(endChunk);
+                            MoveUnit(path);
+                        }
+                    } 
+
+                }
+                if (hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
+                {
+                    cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                    if (selectedObject == null)
+                    {
+                        selectedObject = hit.collider.gameObject;
+                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
+                    }
+                    else
+                    {
+                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                        selectedObject = hit.collider.gameObject;
+                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
+                    }
+                    shooter.ShowButton(true);
                 }
             }
         }
@@ -253,5 +283,10 @@ public class AI_Script : MonoBehaviour
     private void MoveUnit(List<Chunk_Script> path)
     {
         aiEntity.GetComponent<AI_Follower_Script>().SetPath(path);
+    }
+
+    public void ConfirmShot()
+    {
+        shooter.Shoot(selectedObject, aiEntity);
     }
 }

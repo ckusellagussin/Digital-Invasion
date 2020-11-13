@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 82519112904615550}
   - component: {fileID: 8660011748334944137}
   - component: {fileID: 4786896252321876258}
+  - component: {fileID: 864686134637698020}
   m_Layer: 0
   m_Name: High_Wall
   m_TagString: Tall Cover
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840663575913195319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.496, y: 1.017, z: -9.457}
+  m_LocalPosition: {x: 19.496, y: 0, z: -9.457}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,3 +96,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &864686134637698020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840663575913195319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed2ec023250f64408e183e3f91e0378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkUnder: {fileID: 0}
+  lowCoverPrefab: {fileID: 6459891819891829858, guid: a19f44cbf8a810b4da2911f56a64690e,
+    type: 3}
+  yoffset: 0
