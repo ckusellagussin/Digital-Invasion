@@ -38,7 +38,10 @@ public class AI_Script : MonoBehaviour
         {
             if (selectedObject != null)
             {
-                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                if (selectedObject.GetComponent<MeshRenderer>() != null)
+                {
+                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                }
                 selectedObject = null;
             }
 
@@ -47,37 +50,62 @@ public class AI_Script : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.CompareTag("Chunk"))
+                if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 0)
                 {
-                    SetGrid();
-                    endChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
-
-                    if (!endChunk.impassable && !endChunk.lowCover)
+                    if (hit.collider.CompareTag("Chunk"))
                     {
-                        path = FindPath(endChunk.gameObject);
-                        if (path != null)
+                        SetGrid();
+                        endChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
+
+                        if (!endChunk.impassable && !endChunk.lowCover)
                         {
-                            path = CalculatePath(endChunk);
-                            MoveUnit(path);
+                            path = FindPath(endChunk.gameObject);
+                            if (path != null)
+                            {
+                                aiEntity.GetComponent<AI_Follower_Script>().TakeAction();
+                                path = CalculatePath(endChunk);
+                                MoveUnit(path);
+                            }
                         }
-                    } 
 
-                }
-                if (hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
-                {
-                    cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
-                    if (selectedObject == null)
-                    {
-                        selectedObject = hit.collider.gameObject;
-                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
                     }
-                    else
+                    else if (hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
                     {
-                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
-                        selectedObject = hit.collider.gameObject;
-                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
+                        float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
+                        if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
+                        {
+                            cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                            if (selectedObject == null)
+                            {
+                                selectedObject = hit.collider.gameObject;
+                                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
+                            }
+                            else
+                            {
+                                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                                selectedObject = hit.collider.gameObject;
+                                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
+                            }
+                            shooter.ShowButton(true);
+                        }
                     }
-                    shooter.ShowButton(true);
+                    else if(hit.collider.CompareTag("Unit"))
+                    {
+                        float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
+                        if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
+                        {
+                            cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                            if (selectedObject == null)
+                            {
+                                selectedObject = hit.collider.gameObject;
+                            }
+                            else
+                            {
+                                selectedObject = hit.collider.gameObject;
+                            }
+                            shooter.ShowButton(true);
+                        }
+                    }
                 }
             }
         }
@@ -288,5 +316,6 @@ public class AI_Script : MonoBehaviour
     public void ConfirmShot()
     {
         shooter.Shoot(selectedObject, aiEntity);
+        aiEntity.GetComponent<AI_Follower_Script>().TakeAction();
     }
 }

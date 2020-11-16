@@ -6,6 +6,8 @@ public class AI_Follower_Script : MonoBehaviour
 {
     public Chunk_Script currentChunk;
     public Chunk_Script targetChunk;
+    public GameObject manager;
+    public Turn_Script turnScript;
     public float speed;
     public float maxDistance;
     public float maxRange;
@@ -14,6 +16,12 @@ public class AI_Follower_Script : MonoBehaviour
     private List<Chunk_Script> donePath;
     [SerializeField]
     private Chunk_Script endChunk;
+
+    [SerializeField]
+    private MeshRenderer[] pips;
+
+    [SerializeField]
+    private int actions;
 
 
     // Update is called once per frame
@@ -103,6 +111,38 @@ public class AI_Follower_Script : MonoBehaviour
 
     public void DealDamage(AI_Follower_Script target)
     {
-        Destroy(gameObject);
+        TakeAction();
+        Destroy(target.gameObject);
+    }
+
+    public int GetActions()
+    {
+        return actions;
+    }
+
+    public void TakeAction()
+    {
+        actions -= 1;
+        if (turnScript == null)
+        {
+            turnScript = manager.GetComponent<Turn_Script>();
+        }
+        if (actions == 1)
+        {
+            pips[0].enabled = false;
+            turnScript.CheckActions();
+        }
+        else if (actions == 0)
+        {
+            pips[1].enabled = false;
+            turnScript.CheckActions();
+        }
+    }
+
+    public void NewTurn()
+    {
+        actions = 2;
+        pips[0].enabled = true;
+        pips[1].enabled = true;
     }
 }
