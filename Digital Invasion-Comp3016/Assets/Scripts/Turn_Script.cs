@@ -38,4 +38,12 @@ public class Turn_Script : MonoBehaviour
             Debug.Log("New Turn");
         }
     }
+
+    public void NewTurn()
+    {
+        foreach (AI_Follower_Script af in unitList)
+        {
+            af.NewTurn();
+        }
+    }
 }

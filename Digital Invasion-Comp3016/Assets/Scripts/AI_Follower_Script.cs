@@ -23,6 +23,12 @@ public class AI_Follower_Script : MonoBehaviour
     [SerializeField]
     private int actions;
 
+    private Turn_Script[] turnS;
+
+    private void Start()
+    {
+        turnS = GameObject.FindGameObjectWithTag("Turn_Manager").GetComponents<Turn_Script>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -112,6 +118,7 @@ public class AI_Follower_Script : MonoBehaviour
     public void DealDamage(AI_Follower_Script target)
     {
         TakeAction();
+        turnS[0].unitList.Remove(target);
         Destroy(target.gameObject);
     }
 

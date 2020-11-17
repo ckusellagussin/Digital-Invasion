@@ -8,6 +8,7 @@ TagManager:
   - Tall Cover
   - Unit
   - Low Cover
+  - Turn_Manager
   layers:
   - Default
   - TransparentFX
