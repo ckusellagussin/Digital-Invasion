@@ -32,11 +32,17 @@ public class Shooting_Script : MonoBehaviour
                     h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
                     break;
                 }
-                if (h.collider.tag == "Low Cover")
+                else if (h.collider.tag == "Low Cover")
                 {
-                    if(distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5)
+                    if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5)
                     {
-                        if (target.tag == "Unit")
+                        Debug.Log("Hit Low Cover");
+                        h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                        break;
+                    }
+                    else if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5)
+                    {
+                        if (target.tag == "Good Guy" ||  target.tag == "Bad Guy")
                         {
                             Debug.Log("Hit Low Cover");
                             h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
@@ -52,22 +58,35 @@ public class Shooting_Script : MonoBehaviour
                         {
                             Debug.Log("Went Over Low Cover");
                         }
-                    } 
-                    else if(distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5)
-                    {
-                        Debug.Log("Hit Low Cover");
-                        h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
-                        break;
                     }
                     else
                     {
                         Debug.Log("Went Over Low Cover");
                     }
                 }
-                if (h.collider.tag == "Unit")
+                else if (h.collider.tag == "Good Guy")
                 {
-                    shooterUnit.DealDamage(h.collider.gameObject.GetComponent<AI_Follower_Script>());
-                    Debug.Log("Hit Unit");
+                    if (shooter.tag == "Bad Guy")
+                    {
+                        if (target == h.collider.gameObject)
+                        {
+                            shooterUnit.DealDamage(h.collider.gameObject.GetComponent<AI_Follower_Script>());
+                            Debug.Log("Hit Unit");
+                            break;
+                        }
+                    }
+                }
+                else if (h.collider.tag == "Bad Guy")
+                {
+                    if (shooter.tag == "Good Guy")
+                    {
+                        if (target == h.collider.gameObject)
+                        {
+                            shooterUnit.DealDamage(h.collider.gameObject.GetComponent<AI_Follower_Script>());
+                            Debug.Log("Hit Unit");
+                            break;
+                        }
+                    }
                 }
             }
         }

@@ -9,6 +9,8 @@ TagManager:
   - Unit
   - Low Cover
   - Turn_Manager
+  - Good Guy
+  - Bad Guy
   layers:
   - Default
   - TransparentFX

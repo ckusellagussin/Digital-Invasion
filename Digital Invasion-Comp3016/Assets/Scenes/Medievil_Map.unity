@@ -424,6 +424,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 864686134637698020, guid: fc205d861d68a7d4198ea3851ee38c0d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc205d861d68a7d4198ea3851ee38c0d, type: 3}
+--- !u!114 &30420862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1774330107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af527755b39c8b4a93e1aad6b3d31e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &30868654 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 840663575913195319, guid: fc205d861d68a7d4198ea3851ee38c0d,
@@ -1625,13 +1637,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134120432}
-  m_LocalRotation: {x: 0.32556805, y: 0, z: 0, w: 0.9455186}
-  m_LocalPosition: {x: 0, y: 6, z: -8}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 7, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1087610869}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 38, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &144763852
 GameObject:
   m_ObjectHideFlags: 0
@@ -8778,6 +8790,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Dummy_Male_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6338426954343304110, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Good Guy
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: maxDistance
@@ -8793,6 +8810,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1917078590}
+    - target: {fileID: 6338426954343337244, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954348512944, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12230,7 +12252,7 @@ GameObject:
   - component: {fileID: 900891145}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Low Cover
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15025,6 +15047,18 @@ MonoBehaviour:
   lowCoverPrefab: {fileID: 6459891819891829858, guid: a19f44cbf8a810b4da2911f56a64690e,
     type: 3}
   yoffset: 0
+--- !u!114 &1051530257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1746283393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af527755b39c8b4a93e1aad6b3d31e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1070386774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 840663575913195319, guid: fc205d861d68a7d4198ea3851ee38c0d,
@@ -16996,6 +17030,11 @@ PrefabInstance:
       propertyPath: shooter
       value: 
       objectReference: {fileID: 1917078593}
+    - target: {fileID: 8468278310533389048, guid: 0049ca793ffdf8a498f47f196c03e390,
+        type: 3}
+      propertyPath: turnScript
+      value: 
+      objectReference: {fileID: 1917078594}
     - target: {fileID: 8468278310533389049, guid: 0049ca793ffdf8a498f47f196c03e390,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21498,6 +21537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Dummy_Male_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6338426954343304110, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bad Guy
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: maxDistance
@@ -21513,6 +21557,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1917078590}
+    - target: {fileID: 6338426954343337244, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954348512944, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -25770,6 +25819,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Dummy_Male_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6338426954343304110, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bad Guy
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: maxDistance
@@ -25785,6 +25839,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1917078590}
+    - target: {fileID: 6338426954343337244, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954348512944, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26538,6 +26597,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Dummy_Male_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6338426954343304110, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Good Guy
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: maxDistance
@@ -26553,6 +26617,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1917078590}
+    - target: {fileID: 6338426954343337244, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6338426954348512944, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -28092,9 +28161,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adfeb028111b3c04eb437f01c614037a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitList:
+  allList:
   - {fileID: 16948447}
+  - {fileID: 30420862}
   - {fileID: 1999879713}
+  - {fileID: 1051530257}
+  goodList:
+  - {fileID: 16948447}
+  - {fileID: 30420862}
+  badList:
+  - {fileID: 1999879713}
+  - {fileID: 1051530257}
+  aiScript: {fileID: 1306940413}
+  currentTeam: 0
 --- !u!1 &1919135443
 GameObject:
   m_ObjectHideFlags: 0

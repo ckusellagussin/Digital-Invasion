@@ -27,7 +27,7 @@ public class AI_Follower_Script : MonoBehaviour
 
     private void Start()
     {
-        turnS = GameObject.FindGameObjectWithTag("Turn_Manager").GetComponents<Turn_Script>();
+        turnScript = manager.gameObject.GetComponent<Turn_Script>();
     }
 
     // Update is called once per frame
@@ -83,15 +83,20 @@ public class AI_Follower_Script : MonoBehaviour
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed * Time.deltaTime);
             }
+            //Do Nothing - turn off calculations?
             else
             {
-                //Do Nothing - turn off calculations?
                 targetChunk = null;
+                if (GetActions() == 0)
+                {
+                    turnScript.aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
+                    turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
+                }
             }
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         Ray ray = new Ray(this.transform.position, -this.transform.up);
         RaycastHit hit;
@@ -99,7 +104,7 @@ public class AI_Follower_Script : MonoBehaviour
         {
             if (hit.collider.CompareTag("Chunk"))
             {
-                currentChunk = hit.collider.gameObject.transform.parent.GetComponent<Chunk_Script>();
+                currentChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
             }
         }
 
@@ -117,8 +122,15 @@ public class AI_Follower_Script : MonoBehaviour
 
     public void DealDamage(AI_Follower_Script target)
     {
-        TakeAction();
-        turnS[0].unitList.Remove(target);
+        turnScript.allList.Remove(target);
+        if(target.gameObject.tag == "Good Guy")
+        {
+            turnScript.badList.Remove(target);
+        } 
+        else if(target.gameObject.tag == "Bad Guy")
+        {
+            turnScript.goodList.Remove(target);
+        }
         Destroy(target.gameObject);
     }
 
@@ -127,9 +139,9 @@ public class AI_Follower_Script : MonoBehaviour
         return actions;
     }
 
-    public void TakeAction()
+    public void TakeAction(int actionUsed)
     {
-        actions -= 1;
+        actions -= actionUsed;
         if (turnScript == null)
         {
             turnScript = manager.GetComponent<Turn_Script>();
@@ -139,8 +151,10 @@ public class AI_Follower_Script : MonoBehaviour
             pips[0].enabled = false;
             turnScript.CheckActions();
         }
-        else if (actions == 0)
+        else if (actions <= 0)
         {
+            actions = 0;
+            pips[0].enabled = false;
             pips[1].enabled = false;
             turnScript.CheckActions();
         }

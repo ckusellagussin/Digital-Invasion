@@ -113,14 +113,14 @@ public class Camera_Movement_Script : MonoBehaviour
 
         if (scroll > 0f)
         {
-            if (camera.gameObject.transform.position.y > 3)
+            if (camera.gameObject.transform.position.y > 5)
             {
                 camera.gameObject.transform.position = Vector3.MoveTowards(camera.gameObject.transform.position, camera.gameObject.transform.position + camera.gameObject.transform.forward, speed * 2 * Time.deltaTime);
             }
         }
         if (scroll < 0f)
         {
-            if (camera.gameObject.transform.position.y < 9)
+            if (camera.gameObject.transform.position.y < 12)
             {
                 camera.gameObject.transform.position = Vector3.MoveTowards(camera.gameObject.transform.position, camera.gameObject.transform.position + -camera.gameObject.transform.forward, speed * 2 * Time.deltaTime);
             }
@@ -132,12 +132,12 @@ public class Camera_Movement_Script : MonoBehaviour
         if (direction == 0)
         {
             waiting = false;
-            transform.Rotate(0, 90, 0);
+            transform.Rotate(0, 15, 0);
         }
         if (direction == 1)
         {
             waiting = false;
-            transform.Rotate(0, -90, 0);
+            transform.Rotate(0, -15, 0);
         }
     }
 }

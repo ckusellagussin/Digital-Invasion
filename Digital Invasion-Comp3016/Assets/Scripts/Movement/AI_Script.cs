@@ -25,6 +25,8 @@ public class AI_Script : MonoBehaviour
     [SerializeField]
     private Shooting_Script shooter;
 
+    public Turn_Script turnScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,12 +64,12 @@ public class AI_Script : MonoBehaviour
                             path = FindPath(endChunk.gameObject);
                             if (path != null)
                             {
-                                aiEntity.GetComponent<AI_Follower_Script>().TakeAction();
+                                aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
                                 path = CalculatePath(endChunk);
                                 MoveUnit(path);
+                                cameraTrolley.transform.position = endChunk.transform.position;
                             }
                         }
-
                     }
                     else if (hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
                     {
@@ -89,21 +91,44 @@ public class AI_Script : MonoBehaviour
                             shooter.ShowButton(true);
                         }
                     }
-                    else if(hit.collider.CompareTag("Unit"))
+                    else if(hit.collider.CompareTag("Good Guy"))
                     {
-                        float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
-                        if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
+                        if (aiEntity.GetComponent<AI_Follower_Script>().turnScript.currentTeam == 1)
                         {
-                            cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
-                            if (selectedObject == null)
+                            float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
+                            if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
                             {
-                                selectedObject = hit.collider.gameObject;
+                                cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                                if (selectedObject == null)
+                                {
+                                    selectedObject = hit.collider.gameObject;
+                                }
+                                else
+                                {
+                                    selectedObject = hit.collider.gameObject;
+                                }
+                                shooter.ShowButton(true);
                             }
-                            else
+                        }
+                    }
+                    else if (hit.collider.CompareTag("Bad Guy"))
+                    {
+                        if (aiEntity.GetComponent<AI_Follower_Script>().turnScript.currentTeam == 0)
+                        {
+                            float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
+                            if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
                             {
-                                selectedObject = hit.collider.gameObject;
+                                cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                                if (selectedObject == null)
+                                {
+                                    selectedObject = hit.collider.gameObject;
+                                }
+                                else
+                                {
+                                    selectedObject = hit.collider.gameObject;
+                                }
+                                shooter.ShowButton(true);
                             }
-                            shooter.ShowButton(true);
                         }
                     }
                 }
@@ -116,9 +141,29 @@ public class AI_Script : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.CompareTag("Unit"))
+                if (hit.collider.CompareTag("Good Guy"))
                 {
-                    aiEntity = hit.collider.gameObject;
+                    if (turnScript.currentTeam == 0 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 1)
+                    {
+                        aiEntity = hit.collider.gameObject;
+                        cameraTrolley.transform.position = aiEntity.transform.position;
+                    } 
+                    else
+                    {
+                        cameraTrolley.transform.position = aiEntity.transform.position;
+                    }
+                }
+                if (hit.collider.CompareTag("Bad Guy"))
+                {
+                    if (turnScript.currentTeam == 1 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 1)
+                    {
+                        aiEntity = hit.collider.gameObject;
+                        cameraTrolley.transform.position = aiEntity.transform.position;
+                    }
+                    else
+                    {
+                        cameraTrolley.transform.position = aiEntity.transform.position;
+                    }
                 }
             }
         }
@@ -316,6 +361,11 @@ public class AI_Script : MonoBehaviour
     public void ConfirmShot()
     {
         shooter.Shoot(selectedObject, aiEntity);
-        aiEntity.GetComponent<AI_Follower_Script>().TakeAction();
+        aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
+        if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
+        {
+            aiEntity = turnScript.GetNextUnit().gameObject;
+            cameraTrolley.transform.position = aiEntity.transform.position;
+        }
     }
 }
