@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AI_Follower_Script : MonoBehaviour
 {
     public Chunk_Script currentChunk;
     public Chunk_Script targetChunk;
     public GameObject manager;
+    public GameObject healthBar;
     public Turn_Script turnScript;
+   
     public float speed;
     public float maxDistance;
     public float maxRange;
+    public float currentHealth;
+    public float maxHealth;
+    public float damage;
+
+
+    public Slider slider;
+    
+
     [SerializeField]
     private List<Chunk_Script> path;
     private List<Chunk_Script> donePath;
@@ -25,14 +36,49 @@ public class AI_Follower_Script : MonoBehaviour
 
     private Turn_Script[] turnS;
 
+    public float calculateHealthValue()
+    {
+
+        return currentHealth / maxHealth;
+
+
+    }
+
+
     private void Start()
     {
         turnScript = manager.gameObject.GetComponent<Turn_Script>();
+
+        currentHealth = maxHealth;
+        slider.value = calculateHealthValue();
+       
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        slider.value = calculateHealthValue();
+
+        if (currentHealth < maxHealth)
+        {
+            healthBar.SetActive(true);
+
+        }
+
+
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+
+
+        }
+
+
+
         if (targetChunk != null)
         {
             if (currentChunk != endChunk)
@@ -110,6 +156,8 @@ public class AI_Follower_Script : MonoBehaviour
 
     }
 
+
+
     public void SetPath(List<Chunk_Script> newPath)
     {
         if (newPath != path) 
@@ -122,17 +170,48 @@ public class AI_Follower_Script : MonoBehaviour
 
     public void DealDamage(AI_Follower_Script target)
     {
-        turnScript.allList.Remove(target);
-        if(target.gameObject.tag == "Good Guy")
+        
+        slider.value = calculateHealthValue();
+
+        if (currentHealth <= 0)
         {
+            Destroy(target.gameObject);
             turnScript.badList.Remove(target);
-        } 
-        else if(target.gameObject.tag == "Bad Guy")
-        {
-            turnScript.goodList.Remove(target);
+
         }
-        Destroy(target.gameObject);
+     
+        
+        if(target.gameObject.tag == "Good Guy")
+       {
+            currentHealth =- damage;
+            slider.value = calculateHealthValue();
+
+        }
+       
+       else if (target.gameObject.tag == "Bad Guy")
+        {
+            currentHealth =- damage;
+            slider.value = calculateHealthValue();
+
+        }
+
+      //  turnScript.allList.Remove(target);
+      //  if(target.gameObject.tag == "Good Guy")
+      //  {
+            
+
+       //    turnScript.badList.Remove(target);
+      //  } 
+      // else if(target.gameObject.tag == "Bad Guy")
+      //  {
+           
+       //      turnScript.goodList.Remove(target);
+      //  }
+      //  Destroy(target.gameObject);
+
     }
+
+    
 
     public int GetActions()
     {
@@ -166,4 +245,9 @@ public class AI_Follower_Script : MonoBehaviour
         pips[0].enabled = true;
         pips[1].enabled = true;
     }
+
+    
+
+
 }
+
