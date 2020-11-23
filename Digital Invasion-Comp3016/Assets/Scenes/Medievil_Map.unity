@@ -8832,7 +8832,7 @@ PrefabInstance:
         type: 3}
       propertyPath: slider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 938051045}
     - target: {fileID: 6338426954343337233, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
         type: 3}
       propertyPath: maxHealth
@@ -13066,6 +13066,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 864686134637698020, guid: fc205d861d68a7d4198ea3851ee38c0d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc205d861d68a7d4198ea3851ee38c0d, type: 3}
+--- !u!114 &938051045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 939372401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &939372401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13196,12 +13208,12 @@ PrefabInstance:
     - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
         type: 3}
       propertyPath: m_Value
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
         type: 3}
       propertyPath: m_MaxValue
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95669b3613dc0114bae0338d029bdf0a, type: 3}
@@ -27771,6 +27783,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+        type: 3}
+      propertyPath: m_Value
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95669b3613dc0114bae0338d029bdf0a, type: 3}
 --- !u!1 &1838222066 stripped
@@ -29972,6 +29994,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+        type: 3}
+      propertyPath: m_Value
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95669b3613dc0114bae0338d029bdf0a, type: 3}
 --- !u!1001 &2042650017
@@ -31861,6 +31893,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335213197421545320, guid: 95669b3613dc0114bae0338d029bdf0a,
+        type: 3}
+      propertyPath: m_Value
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95669b3613dc0114bae0338d029bdf0a, type: 3}

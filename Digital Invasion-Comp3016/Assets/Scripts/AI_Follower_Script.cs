@@ -38,10 +38,9 @@ public class AI_Follower_Script : MonoBehaviour
 
     public float calculateHealthValue()
     {
+        //By setting the slider to values 0 - 20 instead of 0 - 100 we can just enter the health value to get the current slider setup
 
-        return currentHealth / maxHealth;
-
-
+        return (currentHealth / 2.0f) / 10.0f;
     }
 
 
@@ -50,9 +49,7 @@ public class AI_Follower_Script : MonoBehaviour
         turnScript = manager.gameObject.GetComponent<Turn_Script>();
 
         currentHealth = maxHealth;
-        slider.value = calculateHealthValue();
-       
-
+        slider.value = currentHealth;
         
     }
 
@@ -60,12 +57,9 @@ public class AI_Follower_Script : MonoBehaviour
     void Update()
     {
 
-        slider.value = calculateHealthValue();
-
         if (currentHealth < maxHealth)
         {
             healthBar.SetActive(true);
-
         }
 
 
@@ -171,28 +165,32 @@ public class AI_Follower_Script : MonoBehaviour
     public void DealDamage(AI_Follower_Script target)
     {
         
-        slider.value = calculateHealthValue();
-
-        if (currentHealth <= 0)
-        {
-            Destroy(target.gameObject);
-            turnScript.badList.Remove(target);
-
-        }
-     
+        //slider.value = calculateHealthValue();
+        // Not needed
         
-        if(target.gameObject.tag == "Good Guy")
-       {
-            currentHealth =- damage;
-            slider.value = calculateHealthValue();
 
-        }
-       
-       else if (target.gameObject.tag == "Bad Guy")
+
+        if (target.gameObject.tag == "Good Guy")
         {
-            currentHealth =- damage;
-            slider.value = calculateHealthValue();
+            target.currentHealth -= damage;
+            target.slider.value = target.currentHealth;
+            //Was interacting with this unit's slider, not the target's slider, so health won't change on damage
+            if (target.currentHealth <= 0)
+            {
+                turnScript.goodList.Remove(target);
+                Destroy(target.gameObject);
+            }
+        }
 
+        else if (target.gameObject.tag == "Bad Guy")
+        {
+            target.currentHealth -= damage;
+            target.slider.value = target.currentHealth;
+            if (target.currentHealth <= 0)
+            {
+                turnScript.badList.Remove(target);
+                Destroy(target.gameObject);
+            }
         }
 
       //  turnScript.allList.Remove(target);

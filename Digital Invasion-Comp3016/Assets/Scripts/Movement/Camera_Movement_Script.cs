@@ -132,12 +132,12 @@ public class Camera_Movement_Script : MonoBehaviour
         if (direction == 0)
         {
             waiting = false;
-            transform.Rotate(0, 15, 0);
+            transform.Rotate(0, 10, 0);
         }
         if (direction == 1)
         {
             waiting = false;
-            transform.Rotate(0, -15, 0);
+            transform.Rotate(0, -10, 0);
         }
     }
 }
