@@ -18,7 +18,7 @@ public class AI_Follower_Script : MonoBehaviour
     public float maxHealth;
     public float damage;
 
-
+    public AI_Script aiScript;
     public Slider slider;
     
 
@@ -127,9 +127,14 @@ public class AI_Follower_Script : MonoBehaviour
             else
             {
                 targetChunk = null;
+                if (actions > 0)
+                {
+                 aiScript.DistanceTemplate();
+                }
                 if (GetActions() == 0)
                 {
-                    turnScript.aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
+                    aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
+                    aiScript.DistanceTemplate();
                     turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
                 }
             }
@@ -149,7 +154,6 @@ public class AI_Follower_Script : MonoBehaviour
         }
 
     }
-
 
 
     public void SetPath(List<Chunk_Script> newPath)
@@ -177,6 +181,7 @@ public class AI_Follower_Script : MonoBehaviour
             //Was interacting with this unit's slider, not the target's slider, so health won't change on damage
             if (target.currentHealth <= 0)
             {
+                turnScript.allList.Remove(target);
                 turnScript.goodList.Remove(target);
                 Destroy(target.gameObject);
             }
@@ -188,6 +193,7 @@ public class AI_Follower_Script : MonoBehaviour
             target.slider.value = target.currentHealth;
             if (target.currentHealth <= 0)
             {
+                turnScript.allList.Remove(target);
                 turnScript.badList.Remove(target);
                 Destroy(target.gameObject);
             }

@@ -8,6 +8,7 @@ public class AI_Script : MonoBehaviour
 
     public List<Chunk_Script> openPath;
     public List<Chunk_Script> closedPath;
+    public List<Chunk_Script> visibleTemplate;
     public Chunk_Script startChunk;
     public Chunk_Script endChunk;
 
@@ -64,10 +65,10 @@ public class AI_Script : MonoBehaviour
                             path = FindPath(endChunk.gameObject);
                             if (path != null)
                             {
-                                aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
                                 path = CalculatePath(endChunk);
                                 MoveUnit(path);
                                 cameraTrolley.transform.position = endChunk.transform.position;
+                                aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
                             }
                         }
                     }
@@ -147,6 +148,7 @@ public class AI_Script : MonoBehaviour
                     {
                         aiEntity = hit.collider.gameObject;
                         cameraTrolley.transform.position = aiEntity.transform.position;
+                        DistanceTemplate();
                     } 
                     else
                     {
@@ -159,6 +161,7 @@ public class AI_Script : MonoBehaviour
                     {
                         aiEntity = hit.collider.gameObject;
                         cameraTrolley.transform.position = aiEntity.transform.position;
+                        DistanceTemplate();
                     }
                     else
                     {
@@ -169,14 +172,20 @@ public class AI_Script : MonoBehaviour
         }
     }
 
-    public void DistanceHighlight(GameObject newEndChunk)
+    //public void DistanceHighlight(GameObject newEndChunk)
+    //{
+    //    SetGrid();
+    //    path = FindPath(newEndChunk);
+    //    if (path != null)
+    //    {
+    //        newEndChunk.GetComponentInChildren<MeshRenderer>().enabled = true;
+    //    }
+    //}
+
+    public void DistanceTemplate()
     {
         SetGrid();
-        path = FindPath(newEndChunk);
-        if (path != null)
-        {
-            newEndChunk.GetComponentInChildren<MeshRenderer>().enabled = true;
-        }
+        FindTemplate();
     }
 
     private List<Chunk_Script> FindPath(GameObject endChunk)
@@ -231,6 +240,70 @@ public class AI_Script : MonoBehaviour
                             if (!openPath.Contains(neighbour))
                             {
                                 openPath.Add(neighbour);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private List<Chunk_Script> FindTemplate()
+    {
+        Vector3 raycastPoint = new Vector3(0, 0.2f, 0);
+        Ray ray = new Ray(aiEntity.transform.position + raycastPoint, -aiEntity.transform.up);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.CompareTag("Chunk"))
+            {
+                startChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
+            }
+        }
+
+        foreach (Chunk_Script cs in visibleTemplate)
+        {
+            cs.gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
+
+        openPath = new List<Chunk_Script>();
+        closedPath = new List<Chunk_Script>();
+        visibleTemplate = new List<Chunk_Script>();
+
+        openPath.Add(startChunk);
+
+        startChunk.gCost = 0;
+        startChunk.CalcFCost();
+
+        while (openPath.Count > 0)
+        {
+            Chunk_Script currentChunk = GetLowestFCost(openPath);
+
+            openPath.Remove(currentChunk);
+            closedPath.Add(currentChunk);
+
+            foreach (Chunk_Script neighbour in GetNeighbourList(currentChunk))
+            {
+                if (closedPath.Contains(neighbour)) continue;
+
+                if (neighbour != null)
+                {
+                    int tentativeGCost = currentChunk.gCost + CalculateDistanceCost(currentChunk, neighbour);
+                    if (tentativeGCost < neighbour.gCost && tentativeGCost <= aiEntity.GetComponent<AI_Follower_Script>().maxDistance)
+                    {
+                        if (!neighbour.impassable)
+                        {
+                            neighbour.fromChunk = currentChunk;
+                            neighbour.gCost = tentativeGCost;
+                            neighbour.CalcFCost();
+
+                            if (!openPath.Contains(neighbour))
+                            {
+                                openPath.Add(neighbour);
+                                visibleTemplate.Add(neighbour);
+                                neighbour.GetComponentInChildren<MeshRenderer>().enabled = true;
                             }
                         }
                     }
@@ -366,6 +439,7 @@ public class AI_Script : MonoBehaviour
         {
             aiEntity = turnScript.GetNextUnit().gameObject;
             cameraTrolley.transform.position = aiEntity.transform.position;
+            DistanceTemplate();
         }
     }
 }

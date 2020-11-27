@@ -70,25 +70,26 @@ public class Chunk_Script : MonoBehaviour
         
     }
 
-    private void OnMouseOver()
-    {
-        if (mouseOver == false)
-        {
-            mouseOver = true;
-            Invoke("WaitTimer", 0.1f);
-        }
-    }
-    private void OnMouseExit()
-    {
-        mouseOver = false;
-        CancelInvoke("WaitTimer");
-        gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
-    }
+    //private void OnMouseOver()
+    //{
+    //    if (mouseOver == false)
+    //    {
+    //        mouseOver = true;
+    //        Invoke("WaitTimer", 0.1f);
+    //    }
+    //}
 
-    private void WaitTimer()
-    {
-        aiPathfinder.DistanceHighlight(gameObject);
-    }
+    //private void OnMouseExit()
+    //{
+    //    mouseOver = false;
+    //    CancelInvoke("WaitTimer");
+    //    gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+    //}
+
+    //private void WaitTimer()
+    //{
+    //    aiPathfinder.DistanceHighlight(gameObject);
+    //}
 
     public void CalcFCost()
     {
