@@ -27,7 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkUnder: {fileID: 0}
   lowCoverPrefab: {fileID: 0}
-  yoffset: 0
+  yoffset: -0.2585
 --- !u!1001 &6869674982733287858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45,27 +45,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.55414
+      value: 18.495
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.1778312
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.53825
+      value: -7.47
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4271e1f51cf274c499b8283b04da0c03, type: 3}
       propertyPath: m_LocalRotation.w

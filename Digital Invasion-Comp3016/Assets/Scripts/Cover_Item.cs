@@ -20,11 +20,11 @@ public class Cover_Item : MonoBehaviour
         {
             GameObject replacement = Instantiate(lowCoverPrefab, transform.position, transform.rotation);
             gameObject.GetComponent<Collider>().enabled = false;
-            replacement.GetComponent<Cover_Item>().SetChunkUnder(chunkUnder);
-            replacement.GetComponent<Cover_Item>().chunkUnder.CheckOnTop();
-            replacement.transform.position += new Vector3(0, replacement.GetComponent<Cover_Item>().yoffset * 2, 0);
+            replacement.transform.position = this.transform.position;
             replacement.transform.parent = transform.parent;
+            replacement.GetComponentInChildren<Cover_Item>().SetChunkUnder(chunkUnder);
             Destroy(gameObject);
+            replacement.GetComponentInChildren<Cover_Item>().chunkUnder.CheckOnTop();
         }
         if (gameObject.CompareTag("Low Cover"))
         {

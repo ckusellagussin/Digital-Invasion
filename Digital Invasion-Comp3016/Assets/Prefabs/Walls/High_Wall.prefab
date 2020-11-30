@@ -109,6 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkUnder: {fileID: 0}
-  lowCoverPrefab: {fileID: 6459891819891829858, guid: a19f44cbf8a810b4da2911f56a64690e,
+  lowCoverPrefab: {fileID: 7677060812371241912, guid: 63147d1ecb885c747bb89640cb9a78c4,
     type: 3}
   yoffset: 0

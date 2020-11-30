@@ -38,6 +38,25 @@ public class Chunk_Script : MonoBehaviour
         }
     }
 
+    public void SetOnTop()
+    {
+        Ray ray = new Ray(this.transform.position, this.transform.up);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 5))
+        {
+            if (hit.collider.CompareTag("Tall Cover"))
+            {
+                impassable = true;
+                hit.collider.gameObject.GetComponent<Cover_Item>().SetChunkUnder(this);
+            }
+            if (hit.collider.CompareTag("Low Cover"))
+            {
+                lowCover = true;
+                hit.collider.gameObject.GetComponent<Cover_Item>().SetChunkUnder(this);
+            }
+        }
+    }
+
     // Check On Top of the chunk to see if cover has changed
     public void CheckOnTop()
     {
