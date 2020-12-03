@@ -144,28 +144,34 @@ public class AI_Script : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Good Guy"))
                 {
-                    if (turnScript.currentTeam == 0 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 1)
+                    if (turnScript.currentTeam == 0 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
                     {
+                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                         aiEntity = hit.collider.gameObject;
                         cameraTrolley.transform.position = aiEntity.transform.position;
                         DistanceTemplate();
+                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                     } 
                     else
                     {
                         cameraTrolley.transform.position = aiEntity.transform.position;
+                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                     }
                 }
                 if (hit.collider.CompareTag("Bad Guy"))
                 {
-                    if (turnScript.currentTeam == 1 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 1)
+                    if (turnScript.currentTeam == 1 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
                     {
+                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                         aiEntity = hit.collider.gameObject;
                         cameraTrolley.transform.position = aiEntity.transform.position;
                         DistanceTemplate();
+                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                     }
                     else
                     {
                         cameraTrolley.transform.position = aiEntity.transform.position;
+                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                     }
                 }
             }
@@ -437,9 +443,11 @@ public class AI_Script : MonoBehaviour
         aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
         if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
         {
+            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
             aiEntity = turnScript.GetNextUnit().gameObject;
             cameraTrolley.transform.position = aiEntity.transform.position;
             DistanceTemplate();
+            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
         }
     }
 }

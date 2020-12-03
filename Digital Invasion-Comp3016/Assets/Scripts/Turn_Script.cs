@@ -48,9 +48,11 @@ public class Turn_Script : MonoBehaviour
             af.NewTurn();
         }
 
+        aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
         aiScript.aiEntity = GetNextUnit().gameObject;
         aiScript.DistanceTemplate();
         aiScript.cameraTrolley.transform.position = aiScript.aiEntity.transform.position;
+        aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
     }
 
     public AI_Follower_Script GetNextUnit()
@@ -87,7 +89,31 @@ public class Turn_Script : MonoBehaviour
         {
             if (goodList.Count > 0 && badList.Count > 0)
             {
-                NewTurn();
+                if (currentTeam == 1)
+                {
+                    foreach (AI_Follower_Script fol in badList)
+                    {
+                        if (fol.GetActions() > 0)
+                        {
+                            newAI = fol;
+                            currentTeam = 1;
+                            break;
+                        }
+                    }
+
+                }
+                else if (currentTeam == 0)
+                {
+                    foreach (AI_Follower_Script fol in goodList)
+                    {
+                        if (fol.GetActions() > 0)
+                        {
+                            newAI = fol;
+                            currentTeam = 0;
+                            break;
+                        }
+                    }
+                }
             }
             else
             {

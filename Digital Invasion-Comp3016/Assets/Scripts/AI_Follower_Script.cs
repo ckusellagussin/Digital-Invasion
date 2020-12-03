@@ -20,6 +20,7 @@ public class AI_Follower_Script : MonoBehaviour
 
     public AI_Script aiScript;
     public Slider slider;
+    public GameObject weaponRange;
     
 
     [SerializeField]
@@ -129,13 +130,15 @@ public class AI_Follower_Script : MonoBehaviour
                 targetChunk = null;
                 if (actions > 0)
                 {
-                 aiScript.DistanceTemplate();
+                    aiScript.DistanceTemplate();
                 }
                 if (GetActions() == 0)
                 {
+                    aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                     aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
                     aiScript.DistanceTemplate();
                     turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
+                    aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                 }
             }
         }
