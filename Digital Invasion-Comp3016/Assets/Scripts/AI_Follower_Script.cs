@@ -19,6 +19,7 @@ public class AI_Follower_Script : MonoBehaviour
     public float damage;
 
     public AI_Script aiScript;
+    public Animation_Manager animManager;
     public Slider slider;
     public GameObject weaponRange;
     
@@ -78,6 +79,10 @@ public class AI_Follower_Script : MonoBehaviour
         {
             if (currentChunk != endChunk)
             {
+                if(animManager.anim.GetBool("Running") == false)
+                {
+                    animManager.Run(true);
+                }
                 if (this.transform.position.x <= targetChunk.positionX + 0.1f && this.transform.position.x > targetChunk.positionX - 0.1f && this.transform.position.z <= targetChunk.positionZ + 0.1f && this.transform.position.z > targetChunk.positionZ - 0.1f)
                 {
                     // Change target chunk to next chunk in path list
@@ -128,6 +133,10 @@ public class AI_Follower_Script : MonoBehaviour
             else
             {
                 targetChunk = null;
+                if (animManager.anim.GetBool("Running") == true)
+                {
+                    animManager.Run(false);
+                }
                 if (actions > 0)
                 {
                     aiScript.DistanceTemplate();

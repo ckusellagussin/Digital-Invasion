@@ -8893,7 +8893,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8016571374021698105, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9208471565359451368, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c, type: 3}
 --- !u!1001 &687100388
 PrefabInstance:
@@ -20732,6 +20738,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8016571374021698105, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c, type: 3}
 --- !u!1001 &1485346790
@@ -24608,6 +24619,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8016571374021698105, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c, type: 3}
 --- !u!4 &1758711450 stripped
@@ -25320,6 +25336,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016571374021698105, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5ff6c62c42ec2f42b6e6bbb6b18b75c, type: 3}
@@ -30928,6 +30949,7 @@ MonoBehaviour:
   maxHealth: 20
   damage: 10
   aiScript: {fileID: 1306940413}
+  animManager: {fileID: 4804062056756667464}
   slider: {fileID: 918653508}
   weaponRange: {fileID: 9056439441647635178}
   path:
@@ -30952,6 +30974,7 @@ GameObject:
   - component: {fileID: 4804062056756568820}
   - component: {fileID: 4804062056756568825}
   - component: {fileID: 4804062056756667463}
+  - component: {fileID: 4804062056756667464}
   m_Layer: 0
   m_Name: Character_Dummy_Male_01 (4)
   m_TagString: Bad Guy
@@ -30978,6 +31001,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4804062056756667464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4804062056756667462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4f42ac6bd00594e8ad4518088ba0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 4804062056756667463}
 --- !u!4 &4804062056756967526
 Transform:
   m_ObjectHideFlags: 0
