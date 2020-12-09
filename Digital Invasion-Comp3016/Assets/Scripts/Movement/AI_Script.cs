@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_Script : MonoBehaviour
@@ -19,6 +20,7 @@ public class AI_Script : MonoBehaviour
 
     public GameObject cameraTrolley;
     public Camera mainCamera;
+    public Camera unitCamera;
 
     private GameObject selectedObject;
     [SerializeField]
@@ -441,13 +443,27 @@ public class AI_Script : MonoBehaviour
     {
         shooter.Shoot(selectedObject, aiEntity);
         aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
+        mainCamera.enabled = false;
+        unitCamera.enabled = true;
+        unitCamera.transform.rotation = aiEntity.transform.rotation;
+        unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
+        StartCoroutine(DelayedUnitSwitch(1.5f));
         if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
         {
             aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
             aiEntity = turnScript.GetNextUnit().gameObject;
-            cameraTrolley.transform.position = aiEntity.transform.position;
-            DistanceTemplate();
-            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
         }
+    }
+
+    IEnumerator DelayedUnitSwitch(float delay)
+    {
+
+        yield return new WaitForSeconds(delay);
+        unitCamera.enabled = false;
+        mainCamera.enabled = true;
+        cameraTrolley.transform.position = aiEntity.transform.position;
+        DistanceTemplate();
+        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+
     }
 }

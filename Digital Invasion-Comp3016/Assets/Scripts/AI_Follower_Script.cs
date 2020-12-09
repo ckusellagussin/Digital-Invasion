@@ -244,14 +244,14 @@ public class AI_Follower_Script : MonoBehaviour
         if (actions == 1)
         {
             pips[0].enabled = false;
-            turnScript.CheckActions();
+            turnScript.DelayedCheckActions();
         }
         else if (actions <= 0)
         {
             actions = 0;
             pips[0].enabled = false;
             pips[1].enabled = false;
-            turnScript.CheckActions();
+            turnScript.DelayedCheckActions();
         }
     }
 

@@ -10,6 +10,8 @@ public class Turn_Script : MonoBehaviour
     private bool actionsLeft = false;
     public AI_Script aiScript;
 
+    public AI_Follower_Script newUnit;
+
     public int currentTeam = 0;
 
     void Start()
@@ -18,6 +20,11 @@ public class Turn_Script : MonoBehaviour
         {
             af.NewTurn();
         }
+    }
+
+    public void DelayedCheckActions()
+    {
+        Invoke("CheckActions", 1.5f);
     }
 
     public void CheckActions()
@@ -57,7 +64,7 @@ public class Turn_Script : MonoBehaviour
 
     public AI_Follower_Script GetNextUnit()
     {
-        AI_Follower_Script newAI = null;
+        newUnit = null;
 
         if (currentTeam == 0)
         {
@@ -65,7 +72,7 @@ public class Turn_Script : MonoBehaviour
             {
                 if (fol.GetActions() > 0)
                 {
-                    newAI = fol;
+                    newUnit = fol;
                     currentTeam = 1;
                     break;
                 }
@@ -78,14 +85,14 @@ public class Turn_Script : MonoBehaviour
             {
                 if (fol.GetActions() > 0)
                 {
-                    newAI = fol;
+                    newUnit = fol;
                     currentTeam = 0;
                     break;
                 }
             }
         }
 
-        if(newAI == null)
+        if(newUnit == null)
         {
             if (goodList.Count > 0 && badList.Count > 0)
             {
@@ -95,7 +102,7 @@ public class Turn_Script : MonoBehaviour
                     {
                         if (fol.GetActions() > 0)
                         {
-                            newAI = fol;
+                            newUnit = fol;
                             currentTeam = 1;
                             break;
                         }
@@ -108,7 +115,7 @@ public class Turn_Script : MonoBehaviour
                     {
                         if (fol.GetActions() > 0)
                         {
-                            newAI = fol;
+                            newUnit = fol;
                             currentTeam = 0;
                             break;
                         }
@@ -121,6 +128,6 @@ public class Turn_Script : MonoBehaviour
             }
         }
 
-        return newAI;
+        return newUnit;
     }
 }
