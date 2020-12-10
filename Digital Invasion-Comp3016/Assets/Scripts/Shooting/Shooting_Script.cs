@@ -7,10 +7,55 @@ public class Shooting_Script : MonoBehaviour
 {
     public Button shootButton;
     public AI_Follower_Script damagedUnit;
+    public bool changeable = true;
+
+    private void Update()
+    {
+        if (shootButton.gameObject.activeSelf)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if(hit.collider.tag != "ShootButton")
+                    {
+                        if (changeable)
+                        {
+                            ShowButton(false);
+                        }
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.tag != "ShootButton")
+                    {
+                        if (changeable)
+                        {
+                            ShowButton(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public void ShowButton(bool setting)
     {
         shootButton.gameObject.SetActive(setting);
+        changeable = false;
+        Invoke("ChangeChangeable", 0.5f);
+    }
+
+    public void ChangeChangeable()
+    {
+        changeable = true;
     }
 
     public void Shoot(GameObject target, GameObject shooter)

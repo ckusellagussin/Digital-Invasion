@@ -11,6 +11,7 @@ TagManager:
   - Turn_Manager
   - Good Guy
   - Bad Guy
+  - ShootButton
   layers:
   - Default
   - TransparentFX

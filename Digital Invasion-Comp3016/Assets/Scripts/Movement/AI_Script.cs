@@ -12,6 +12,7 @@ public class AI_Script : MonoBehaviour
     public List<Chunk_Script> visibleTemplate;
     public Chunk_Script startChunk;
     public Chunk_Script endChunk;
+    public LineRenderer renderer;
 
     public List<Chunk_Script> path;
     public GameObject aiEntity;
@@ -71,6 +72,11 @@ public class AI_Script : MonoBehaviour
                                 MoveUnit(path);
                                 cameraTrolley.transform.position = endChunk.transform.position;
                                 aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
+                                if (selectedObject != null)
+                                {
+                                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                                }
+                                renderer.enabled = false;
                             }
                         }
                     }
@@ -91,6 +97,12 @@ public class AI_Script : MonoBehaviour
                                 selectedObject = hit.collider.gameObject;
                                 selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
                             }
+                            Vector3[] positions = new Vector3[] {
+                                    aiEntity.transform.position,
+                                    selectedObject.transform.position
+                                };
+                            renderer.SetPositions(positions);
+                            renderer.enabled = true;
                             shooter.ShowButton(true);
                         }
                     }
@@ -110,6 +122,11 @@ public class AI_Script : MonoBehaviour
                                 {
                                     selectedObject = hit.collider.gameObject;
                                 }
+                                Vector3[] positions = new Vector3[] { 
+                                    shooter.transform.position
+                                };
+                                renderer.SetPositions(positions);
+                                renderer.enabled = true;
                                 shooter.ShowButton(true);
                             }
                         }
@@ -130,9 +147,19 @@ public class AI_Script : MonoBehaviour
                                 {
                                     selectedObject = hit.collider.gameObject;
                                 }
+                                Vector3[] positions = new Vector3[] {
+                                    shooter.transform.position
+                                };
+                                renderer.SetPositions(positions);
+                                renderer.enabled = true;
                                 shooter.ShowButton(true);
                             }
                         }
+                    }
+                    else
+                    {
+                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                        renderer.enabled = false;
                     }
                 }
             }
@@ -160,7 +187,7 @@ public class AI_Script : MonoBehaviour
                         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                     }
                 }
-                if (hit.collider.CompareTag("Bad Guy"))
+                else if (hit.collider.CompareTag("Bad Guy"))
                 {
                     if (turnScript.currentTeam == 1 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
                     {
@@ -175,6 +202,11 @@ public class AI_Script : MonoBehaviour
                         cameraTrolley.transform.position = aiEntity.transform.position;
                         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                     }
+                }
+                else
+                {
+                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                    renderer.enabled = false;
                 }
             }
         }
