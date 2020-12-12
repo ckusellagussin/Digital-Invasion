@@ -1,13 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Shooting_Script : MonoBehaviour
 {
     public Button shootButton;
     public AI_Follower_Script damagedUnit;
+    public GraphicRaycaster gRaycaster;
     public bool changeable = true;
+
+    private PointerEventData pData;
+    private EventSystem events;
+
+    void Start()
+    {
+        //Fetch the Raycaster from the GameObject (the Canvas)
+        gRaycaster = GetComponent<GraphicRaycaster>();
+        //Fetch the Event System from the Scene
+        events = GetComponent<EventSystem>();
+    }
 
     private void Update()
     {
@@ -15,31 +28,48 @@ public class Shooting_Script : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
+                pData = new PointerEventData(events);
+                pData.position = Input.mousePosition;
+
+                List<RaycastResult> results = new List<RaycastResult>();
+
+                gRaycaster.Raycast(pData, results);
+
+                foreach(RaycastResult rr in results)
                 {
-                    if(hit.collider.tag != "ShootButton")
+                    if(rr.gameObject.tag != "ShootButton")
+                    {
+                        if (changeable)
+                        {
+                            ShowButton(false);
+                        }
+                    } else
+                    {
+                        Debug.Log("Shoot Button");
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                pData = new PointerEventData(events);
+                pData.position = Input.mousePosition;
+
+                List<RaycastResult> results = new List<RaycastResult>();
+
+                gRaycaster.Raycast(pData, results);
+
+                foreach (RaycastResult rr in results)
+                {
+                    if (rr.gameObject.tag != "ShootButton")
                     {
                         if (changeable)
                         {
                             ShowButton(false);
                         }
                     }
-                }
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.collider.tag != "ShootButton")
+                    else
                     {
-                        if (changeable)
-                        {
-                            ShowButton(false);
-                        }
+                        Debug.Log("Shoot Button");
                     }
                 }
             }

@@ -29,7 +29,7 @@ public class Cover_Item : MonoBehaviour
         if (gameObject.CompareTag("Low Cover"))
         {
             gameObject.GetComponent<Collider>().enabled = false;
-            chunkUnder.CheckOnTop();
+
             Destroy(gameObject);
         }
     }
