@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 67316a86aa4fd84428deb10b530790c6, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -28655,7 +28655,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a50b3730c38fbfc49b3c2a8266980f57, type: 2}
+      objectReference: {fileID: 2100000, guid: d99cba3cee7f8954b9dc63befe1d29ff, type: 2}
     - target: {fileID: 1848951582535994944, guid: 8b712726a74dd694e8be5777b53dbe74,
         type: 3}
       propertyPath: m_ReceiveShadows
@@ -28679,7 +28679,7 @@ PrefabInstance:
     - target: {fileID: 6606435240834398230, guid: 8b712726a74dd694e8be5777b53dbe74,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.55414
+      value: -12.34
       objectReference: {fileID: 0}
     - target: {fileID: 6606435240834398230, guid: 8b712726a74dd694e8be5777b53dbe74,
         type: 3}
@@ -28689,7 +28689,7 @@ PrefabInstance:
     - target: {fileID: 6606435240834398230, guid: 8b712726a74dd694e8be5777b53dbe74,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.43825
+      value: 11.68
       objectReference: {fileID: 0}
     - target: {fileID: 6606435240834398230, guid: 8b712726a74dd694e8be5777b53dbe74,
         type: 3}
@@ -28730,6 +28730,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606435240834398230, guid: 8b712726a74dd694e8be5777b53dbe74,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606435240834398230, guid: 8b712726a74dd694e8be5777b53dbe74,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b712726a74dd694e8be5777b53dbe74, type: 3}
