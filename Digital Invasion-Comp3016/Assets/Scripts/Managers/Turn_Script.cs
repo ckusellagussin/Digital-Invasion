@@ -57,6 +57,7 @@ public class Turn_Script : MonoBehaviour
 
         aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
         aiScript.aiEntity = GetNextUnit().gameObject;
+        CheckVisibleEnemies();
         aiScript.DistanceTemplate();
         aiScript.cameraTrolley.transform.position = aiScript.aiEntity.transform.position;
         aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
@@ -129,5 +130,73 @@ public class Turn_Script : MonoBehaviour
         }
 
         return newUnit;
+    }
+
+    public void CheckVisibleEnemies()
+    {
+
+        if (currentTeam == 0)
+        {
+            foreach (AI_Follower_Script bad in badList)
+            {
+                bad.visibleToEnemy = false;
+                foreach (AI_Follower_Script fol in goodList)
+                {
+                    fol.gameObject.SetActive(true);
+                    if (fol.crouching)
+                    {
+                        fol.animManager.Crouch(true);
+                    }
+                    if (Vector3.Distance(fol.transform.position, bad.transform.position) >= fol.viewDistance)
+                    {
+                        if (bad.visibleToEnemy == false)
+                        {
+                            bad.gameObject.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        bad.visibleToEnemy = true;
+                        bad.gameObject.SetActive(true);
+                        if (bad.crouching)
+                        {
+                            bad.animManager.Crouch(true);
+                        }
+                    }
+                }
+            }
+
+        }
+        else if (currentTeam == 1)
+        {
+            foreach (AI_Follower_Script bad in goodList)
+            {
+                bad.visibleToEnemy = false;
+                foreach (AI_Follower_Script fol in badList)
+                {
+                    fol.gameObject.SetActive(true);
+                    if (fol.crouching)
+                    {
+                        fol.animManager.Crouch(true);
+                    }
+                    if (Vector3.Distance(fol.transform.position, bad.transform.position) >= fol.viewDistance)
+                    {
+                        if (bad.visibleToEnemy == false)
+                        {
+                            bad.gameObject.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        bad.visibleToEnemy = true;
+                        bad.gameObject.SetActive(true);
+                        if (bad.crouching)
+                        {
+                            bad.animManager.Crouch(true);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ public class Cover_Item : MonoBehaviour
 {
     public Chunk_Script chunkUnder;
     public GameObject lowCoverPrefab;
+    public Material defaultMaterial;
     public float yoffset;
 
     public void SetChunkUnder(Chunk_Script chunk)

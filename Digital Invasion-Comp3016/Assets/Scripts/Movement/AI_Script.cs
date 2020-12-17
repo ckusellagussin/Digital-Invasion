@@ -72,9 +72,27 @@ public class AI_Script : MonoBehaviour
                                 MoveUnit(path);
                                 cameraTrolley.transform.position = endChunk.transform.position;
                                 aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
+                                if (aiEntity.GetComponent<AI_Follower_Script>().animManager.anim.GetBool("Running") == false)
+                                {
+                                    aiEntity.GetComponent<AI_Follower_Script>().animManager.Run(true);
+                                }
                                 if (selectedObject != null)
                                 {
                                     selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                                }
+                                foreach(Chunk_Script cs in GetNeighbourList(endChunk))
+                                {
+                                    if(cs.lowCover)
+                                    {
+                                        aiEntity.GetComponent<AI_Follower_Script>().animManager.Crouch(true);
+                                        aiEntity.GetComponent<AI_Follower_Script>().crouching = true;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        aiEntity.GetComponent<AI_Follower_Script>().crouching = false;
+                                        aiEntity.GetComponent<AI_Follower_Script>().animManager.Crouch(false);
+                                    }
                                 }
                                 renderer.enabled = false;
                             }
@@ -122,8 +140,9 @@ public class AI_Script : MonoBehaviour
                                 {
                                     selectedObject = hit.collider.gameObject;
                                 }
-                                Vector3[] positions = new Vector3[] { 
-                                    shooter.transform.position
+                                Vector3[] positions = new Vector3[] {
+                                    aiEntity.transform.position,
+                                    selectedObject.transform.position
                                 };
                                 renderer.SetPositions(positions);
                                 renderer.enabled = true;
@@ -148,7 +167,8 @@ public class AI_Script : MonoBehaviour
                                     selectedObject = hit.collider.gameObject;
                                 }
                                 Vector3[] positions = new Vector3[] {
-                                    shooter.transform.position
+                                    aiEntity.transform.position,
+                                    selectedObject.transform.position
                                 };
                                 renderer.SetPositions(positions);
                                 renderer.enabled = true;
@@ -177,6 +197,7 @@ public class AI_Script : MonoBehaviour
                     {
                         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                         aiEntity = hit.collider.gameObject;
+                        turnScript.CheckVisibleEnemies();
                         cameraTrolley.transform.position = aiEntity.transform.position;
                         DistanceTemplate();
                         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
@@ -193,6 +214,7 @@ public class AI_Script : MonoBehaviour
                     {
                         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                         aiEntity = hit.collider.gameObject;
+                        turnScript.CheckVisibleEnemies();
                         cameraTrolley.transform.position = aiEntity.transform.position;
                         DistanceTemplate();
                         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
@@ -205,7 +227,10 @@ public class AI_Script : MonoBehaviour
                 }
                 else
                 {
-                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                    if (selectedObject != null)
+                    {
+                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                    }
                     renderer.enabled = false;
                 }
             }
@@ -477,25 +502,28 @@ public class AI_Script : MonoBehaviour
         aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
         mainCamera.enabled = false;
         unitCamera.enabled = true;
+        renderer.enabled = false;
+        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(true);
         unitCamera.transform.rotation = aiEntity.transform.rotation;
         unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
-        StartCoroutine(DelayedUnitSwitch(1.5f));
-        if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
-        {
-            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
-            aiEntity = turnScript.GetNextUnit().gameObject;
-        }
+        StartCoroutine(DelayedUnitSwitch(2.5f));
     }
 
     IEnumerator DelayedUnitSwitch(float delay)
     {
 
         yield return new WaitForSeconds(delay);
+        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+        if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
+        {
+            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
+            aiEntity = turnScript.GetNextUnit().gameObject;
+        }
         unitCamera.enabled = false;
         mainCamera.enabled = true;
         cameraTrolley.transform.position = aiEntity.transform.position;
         DistanceTemplate();
         aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
-
+        turnScript.CheckVisibleEnemies();
     }
 }

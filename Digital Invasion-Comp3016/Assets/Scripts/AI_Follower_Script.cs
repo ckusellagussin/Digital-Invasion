@@ -13,10 +13,15 @@ public class AI_Follower_Script : MonoBehaviour
    
     public float speed;
     public float maxDistance;
+    public float viewDistance;
     public float maxRange;
     public float currentHealth;
     public float maxHealth;
     public float damage;
+    public bool visibleToEnemy;
+    public bool crouching;
+
+    public Material defaultMaterial;
 
     public AI_Script aiScript;
     public Animation_Manager animManager;
@@ -37,6 +42,8 @@ public class AI_Follower_Script : MonoBehaviour
     private int actions;
 
     private Turn_Script[] turnS;
+
+    public GameObject gTarget;
 
     public float calculateHealthValue()
     {
@@ -79,10 +86,6 @@ public class AI_Follower_Script : MonoBehaviour
         {
             if (currentChunk != endChunk)
             {
-                if(animManager.anim.GetBool("Running") == false)
-                {
-                    animManager.Run(true);
-                }
                 if (this.transform.position.x <= targetChunk.positionX + 0.1f && this.transform.position.x > targetChunk.positionX - 0.1f && this.transform.position.z <= targetChunk.positionZ + 0.1f && this.transform.position.z > targetChunk.positionZ - 0.1f)
                 {
                     // Change target chunk to next chunk in path list
@@ -140,11 +143,13 @@ public class AI_Follower_Script : MonoBehaviour
                 if (actions > 0)
                 {
                     aiScript.DistanceTemplate();
+                    turnScript.CheckVisibleEnemies();
                 }
                 if (GetActions() == 0)
                 {
                     aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                     aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
+                    turnScript.CheckVisibleEnemies();
                     aiScript.DistanceTemplate();
                     turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
                     aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
@@ -180,13 +185,9 @@ public class AI_Follower_Script : MonoBehaviour
 
     public void DealDamage(AI_Follower_Script target)
     {
-        
-        //slider.value = calculateHealthValue();
-        // Not needed
-        
+        gTarget = target.gameObject;
 
-
-        if (target.gameObject.tag == "Good Guy")
+        if (gTarget.tag == "Good Guy")
         {
             target.currentHealth -= damage;
             target.slider.value = target.currentHealth;
@@ -195,11 +196,12 @@ public class AI_Follower_Script : MonoBehaviour
             {
                 turnScript.allList.Remove(target);
                 turnScript.goodList.Remove(target);
-                Destroy(target.gameObject);
+                target.animManager.Die();
+                Invoke("DestroyUnit", 2.5f);
             }
         }
 
-        else if (target.gameObject.tag == "Bad Guy")
+        else if (gTarget.tag == "Bad Guy")
         {
             target.currentHealth -= damage;
             target.slider.value = target.currentHealth;
@@ -207,27 +209,17 @@ public class AI_Follower_Script : MonoBehaviour
             {
                 turnScript.allList.Remove(target);
                 turnScript.badList.Remove(target);
-                Destroy(target.gameObject);
+                target.animManager.Die();
+                Invoke("DestroyUnit", 2.5f);
             }
         }
 
-      //  turnScript.allList.Remove(target);
-      //  if(target.gameObject.tag == "Good Guy")
-      //  {
-            
-
-       //    turnScript.badList.Remove(target);
-      //  } 
-      // else if(target.gameObject.tag == "Bad Guy")
-      //  {
-           
-       //      turnScript.goodList.Remove(target);
-      //  }
-      //  Destroy(target.gameObject);
-
     }
 
-    
+    public void DestroyUnit()
+    {
+        Destroy(gTarget);
+    }
 
     public int GetActions()
     {

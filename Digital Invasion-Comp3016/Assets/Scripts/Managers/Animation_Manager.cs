@@ -10,6 +10,14 @@ public class Animation_Manager : MonoBehaviour
     {
         anim.SetBool("Running", running);
     }
+    public void Shoot(bool shooting)
+    {
+        anim.SetBool("Firing", shooting);
+    }
+    public void Crouch(bool crouching)
+    {
+        anim.SetBool("Crouched", crouching);
+    }
 
     public void Die()
     {

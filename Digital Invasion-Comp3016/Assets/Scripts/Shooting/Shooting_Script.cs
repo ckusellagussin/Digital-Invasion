@@ -16,9 +16,6 @@ public class Shooting_Script : MonoBehaviour
 
     void Start()
     {
-        //Fetch the Raycaster from the GameObject (the Canvas)
-        gRaycaster = GetComponent<GraphicRaycaster>();
-        //Fetch the Event System from the Scene
         events = GetComponent<EventSystem>();
     }
 
@@ -108,7 +105,7 @@ public class Shooting_Script : MonoBehaviour
             {
                 if (h.collider.tag == "Tall Cover")
                 {
-                    if(Vector3.Distance(shooter.transform.position, h.transform.position) <= 2 && target != h.collider.gameObject)
+                    if(Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5 && target != h.collider.gameObject)
                     {
                         RaycastHit hit;
 
