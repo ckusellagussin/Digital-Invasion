@@ -108,48 +108,62 @@ public class Shooting_Script : MonoBehaviour
                     if(Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5 && target != h.collider.gameObject)
                     {
                         RaycastHit hit;
-
-                        if (Physics.Raycast(shooter.transform.position + up1 + new Vector3(1, 0, 0), shooter.transform.forward, out hit, 1.5f))
+                        shooter.transform.position += shooter.transform.right;
+                        Chunk_Script avoidChunk = shooter.GetComponent<AI_Follower_Script>().GetChunkUnder();
+                        if (avoidChunk.impassable == false)
                         {
-                            if (hit.collider.tag == ("Tall Cover"))
+                            if (Physics.Raycast(shooter.transform.position + up1, shooter.transform.forward, out hit, 1.5f))
                             {
-                                Debug.Log("Attempted and hit cover still");
+                                if (hit.collider.tag == ("Tall Cover"))
+                                {
+                                    Debug.Log("Attempted and hit cover still");
+                                }
+                                else
+                                {
+                                    ShootRound(target, shooter, shooter.transform.position);
+                                    Debug.Log("Attempted and didn't hit cover");
+                                    shooter.transform.position += -shooter.transform.right;
+                                    break;
+                                }
                             }
                             else
                             {
-                                ShootRound(target, shooter, shooter.transform.position + new Vector3(1, 0, 0));
+                                ShootRound(target, shooter, shooter.transform.position);
                                 Debug.Log("Attempted and didn't hit cover");
+                                shooter.transform.position += -shooter.transform.right;
                                 break;
                             }
                         }
-                        else
-                        {
-                            ShootRound(target, shooter, shooter.transform.position + new Vector3(1, 0, 0));
-                            Debug.Log("Attempted and didn't hit cover");
-                            break;
-                        }
 
-                        if (Physics.Raycast(shooter.transform.position + up1 + new Vector3(-1, 0, 0), shooter.transform.forward, out hit, 1.5f))
+                        shooter.transform.position += -shooter.transform.right;
+                        shooter.transform.position += -shooter.transform.right;
+                        avoidChunk = shooter.GetComponent<AI_Follower_Script>().GetChunkUnder();
+                        if (avoidChunk.impassable == false)
                         {
-                            if (hit.collider.tag == ("Tall Cover"))
+                            if (Physics.Raycast(shooter.transform.position + up1, shooter.transform.forward, out hit, 1.5f))
                             {
-                                Debug.Log("Attempted and hit cover still");
-                                Debug.Log("Hit Tall Cover");
-                                h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
-                                break;
+                                if (hit.collider.tag == ("Tall Cover"))
+                                {
+                                    Debug.Log("Attempted and hit cover still");
+                                    Debug.Log("Hit Tall Cover");
+                                    h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                                    break;
+                                }
+                                else
+                                {
+                                    ShootRound(target, shooter, shooter.transform.position);
+                                    Debug.Log("Attempted and didn't hit cover");
+                                    shooter.transform.position += shooter.transform.right;
+                                    break;
+                                }
                             }
                             else
                             {
-                                ShootRound(target, shooter, shooter.transform.position + new Vector3(1, 0, 0));
+                                ShootRound(target, shooter, shooter.transform.position);
                                 Debug.Log("Attempted and didn't hit cover");
+                                shooter.transform.position += shooter.transform.right;
                                 break;
                             }
-                        }
-                        else
-                        {
-                            ShootRound(target, shooter, shooter.transform.position + new Vector3(-1, 0, 0));
-                            Debug.Log("Attempted and didn't hit cover");
-                            break;
                         }
                     }
                     else
@@ -235,7 +249,7 @@ public class Shooting_Script : MonoBehaviour
 
         if (distance < shooterUnit.maxRange)
         {
-            hits = Physics.RaycastAll(shooter.transform.position + up1, (target.transform.position - shooter.transform.position), distance);
+            hits = Physics.RaycastAll(newShooterTransform + up1, (target.transform.position - newShooterTransform), distance);
             Vector3 lookDirection = target.transform.position;
             lookDirection.y = 0;
             shooter.transform.LookAt(lookDirection);

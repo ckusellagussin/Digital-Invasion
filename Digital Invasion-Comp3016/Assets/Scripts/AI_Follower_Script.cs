@@ -255,7 +255,22 @@ public class AI_Follower_Script : MonoBehaviour
     }
 
     
+    public Chunk_Script GetChunkUnder()
+    {
+        Chunk_Script under = null;
 
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, -transform.up, out hit, 5))
+        {
+            if(hit.collider.tag == "Chunk")
+            {
+                under = hit.collider.gameObject.GetComponent<Chunk_Script>();
+            }
+        }
+
+        return under;
+    }
 
 }
 

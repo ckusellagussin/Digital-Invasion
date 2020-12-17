@@ -453,7 +453,7 @@ public class AI_Script : MonoBehaviour
         }
     }
 
-    private Chunk_Script GetChunk(int x, int z)
+    public Chunk_Script GetChunk(int x, int z)
     {
         return grid.GetChunk(x, z);
     }
