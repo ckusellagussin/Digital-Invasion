@@ -14,6 +14,8 @@ public class Shooting_Script : MonoBehaviour
     private PointerEventData pData;
     private EventSystem events;
 
+    public GameObject bulletPrefab;
+
     void Start()
     {
         events = GetComponent<EventSystem>();
@@ -88,6 +90,11 @@ public class Shooting_Script : MonoBehaviour
     public void Shoot(GameObject target, GameObject shooter)
     {
         AI_Follower_Script shooterUnit = shooter.GetComponent<AI_Follower_Script>();
+
+        GameObject bulletTemp = Instantiate(bulletPrefab, shooterUnit.transform);
+        bulletTemp.transform.position = shooterUnit.transform.position + (shooterUnit.transform.up);
+        bulletTemp.transform.rotation = shooterUnit.transform.rotation;
+        bulletTemp.GetComponent<Bullet_Mover_Script>().DestroyIn30();
 
         Vector3 up1 = new Vector3(0, 0.5f);
         RaycastHit[] hits;

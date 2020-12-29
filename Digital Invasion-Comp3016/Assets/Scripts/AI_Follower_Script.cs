@@ -17,6 +17,8 @@ public class AI_Follower_Script : MonoBehaviour
     public float maxRange;
     public float currentHealth;
     public float maxHealth;
+    public float armour;
+    public float armourPiercing;
     public float damage;
     public bool visibleToEnemy;
     public bool crouching;
@@ -189,28 +191,44 @@ public class AI_Follower_Script : MonoBehaviour
 
         if (gTarget.tag == "Good Guy")
         {
-            target.currentHealth -= damage;
-            target.slider.value = target.currentHealth;
-            //Was interacting with this unit's slider, not the target's slider, so health won't change on damage
-            if (target.currentHealth <= 0)
+            if (target.armour > damage)
             {
-                turnScript.allList.Remove(target);
-                turnScript.goodList.Remove(target);
-                target.animManager.Die();
-                Invoke("DestroyUnit", 2.5f);
+
+            }
+            else
+            {
+                float nDamage = damage - (target.armour - armourPiercing);
+                target.currentHealth -= nDamage;
+                target.slider.value = target.currentHealth;
+                //Was interacting with this unit's slider, not the target's slider, so health won't change on damage
+                if (target.currentHealth <= 0)
+                {
+                    turnScript.allList.Remove(target);
+                    turnScript.goodList.Remove(target);
+                    target.animManager.Die();
+                    Invoke("DestroyUnit", 2.5f);
+                }
             }
         }
 
         else if (gTarget.tag == "Bad Guy")
         {
-            target.currentHealth -= damage;
-            target.slider.value = target.currentHealth;
-            if (target.currentHealth <= 0)
+            if (target.armour > damage)
             {
-                turnScript.allList.Remove(target);
-                turnScript.badList.Remove(target);
-                target.animManager.Die();
-                Invoke("DestroyUnit", 2.5f);
+
+            }
+            else
+            {
+                float nDamage = damage - (target.armour - armourPiercing);
+                target.currentHealth -= nDamage;
+                target.slider.value = target.currentHealth;
+                if (target.currentHealth <= 0)
+                {
+                    turnScript.allList.Remove(target);
+                    turnScript.badList.Remove(target);
+                    target.animManager.Die();
+                    Invoke("DestroyUnit", 2.5f);
+                }
             }
         }
 

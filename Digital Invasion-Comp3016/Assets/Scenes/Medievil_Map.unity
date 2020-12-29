@@ -763,6 +763,21 @@ PrefabInstance:
       propertyPath: aiScript
       value: 
       objectReference: {fileID: 1306940413}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: currentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: armourPiercing
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3365535220338891202, guid: 564b12f16b0e4094a82f09bf48913b44,
         type: 3}
       propertyPath: m_Name
@@ -3230,6 +3245,21 @@ PrefabInstance:
         type: 3}
       propertyPath: viewDistance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681367775136620289, guid: 530d221538b883342b95883f91a4fe92,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681367775136620289, guid: 530d221538b883342b95883f91a4fe92,
+        type: 3}
+      propertyPath: currentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681367775136620289, guid: 530d221538b883342b95883f91a4fe92,
+        type: 3}
+      propertyPath: armourPiercing
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4681367775136651710, guid: 530d221538b883342b95883f91a4fe92,
         type: 3}
@@ -16186,6 +16216,21 @@ PrefabInstance:
       propertyPath: aiScript
       value: 
       objectReference: {fileID: 1306940413}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: currentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: armourPiercing
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3365535220338891202, guid: 564b12f16b0e4094a82f09bf48913b44,
         type: 3}
       propertyPath: m_Name
@@ -16930,6 +16975,21 @@ PrefabInstance:
         type: 3}
       propertyPath: viewDistance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681367775136620289, guid: 530d221538b883342b95883f91a4fe92,
+        type: 3}
+      propertyPath: currentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681367775136620289, guid: 530d221538b883342b95883f91a4fe92,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681367775136620289, guid: 530d221538b883342b95883f91a4fe92,
+        type: 3}
+      propertyPath: armourPiercing
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4681367775136651710, guid: 530d221538b883342b95883f91a4fe92,
         type: 3}
@@ -18085,6 +18145,21 @@ PrefabInstance:
       propertyPath: aiScript
       value: 
       objectReference: {fileID: 1306940413}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: currentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3365535220338794365, guid: 564b12f16b0e4094a82f09bf48913b44,
+        type: 3}
+      propertyPath: armourPiercing
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3365535220338891202, guid: 564b12f16b0e4094a82f09bf48913b44,
         type: 3}
       propertyPath: m_Name
@@ -25227,6 +25302,8 @@ MonoBehaviour:
   damagedUnit: {fileID: 0}
   gRaycaster: {fileID: 850168537}
   changeable: 0
+  bulletPrefab: {fileID: 1311748267360152, guid: c0501fa8ee3ee469d91218231e9dd5aa,
+    type: 3}
 --- !u!114 &1917078594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28324,6 +28401,21 @@ PrefabInstance:
       propertyPath: aiScript
       value: 
       objectReference: {fileID: 1306940413}
+    - target: {fileID: 6087263342317513821, guid: cdbf4db6190e4344388fdfe15c7b16b7,
+        type: 3}
+      propertyPath: currentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087263342317513821, guid: cdbf4db6190e4344388fdfe15c7b16b7,
+        type: 3}
+      propertyPath: armour
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087263342317513821, guid: cdbf4db6190e4344388fdfe15c7b16b7,
+        type: 3}
+      propertyPath: armourPiercing
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdbf4db6190e4344388fdfe15c7b16b7, type: 3}
 --- !u!1001 &2932225247314254526
