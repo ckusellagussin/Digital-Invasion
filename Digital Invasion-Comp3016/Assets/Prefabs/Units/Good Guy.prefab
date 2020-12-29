@@ -621,13 +621,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3050954873852169176}
-  m_LocalRotation: {x: 0.41616297, y: -0.6852072, z: -0.39084926, w: 0.4522571}
+  m_LocalRotation: {x: 0.41616294, y: -0.6852072, z: -0.39084926, w: 0.45225713}
   m_LocalPosition: {x: 0.2695674, y: 1.055661, z: 0.06883081}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1478198187483752433}
-  m_Father: {fileID: 6087263342317123266}
-  m_RootOrder: 6
+  m_Father: {fileID: 8006012419613468390}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6036713890801249710
 MonoBehaviour:
@@ -1085,7 +1085,8 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.0000000033522627, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5078096915536084983}
   m_Father: {fileID: 6087263342317123266}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1204,7 +1205,6 @@ Transform:
   - {fileID: 8864331171138071553}
   - {fileID: 7920517902727173504}
   - {fileID: 8006012419613468390}
-  - {fileID: 5078096915536084983}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 181.63, z: 0}
@@ -1245,13 +1245,17 @@ MonoBehaviour:
   maxRange: 10
   currentHealth: 20
   maxHealth: 20
+  armour: 0
+  armourPiercing: 0
   damage: 10
   visibleToEnemy: 0
+  crouching: 0
   defaultMaterial: {fileID: 0}
   aiScript: {fileID: 0}
   animManager: {fileID: 6087263342317415148}
   slider: {fileID: 7313169608347538347}
   weaponRange: {fileID: 7746145792422921294}
+  unitModel: {fileID: 6039014719271210782}
   path:
   - {fileID: 0}
   - {fileID: 0}

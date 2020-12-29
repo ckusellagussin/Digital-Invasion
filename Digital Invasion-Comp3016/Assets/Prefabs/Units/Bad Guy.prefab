@@ -626,7 +626,8 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.0000000033522627, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7945272522848550585}
   m_Father: {fileID: 3365535220338656738}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -776,7 +777,6 @@ Transform:
   - {fileID: 129174532862828321}
   - {fileID: 1667968626372077216}
   - {fileID: 1573326721525388742}
-  - {fileID: 7945272522848550585}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -817,13 +817,17 @@ MonoBehaviour:
   maxRange: 10
   currentHealth: 20
   maxHealth: 20
+  armour: 0
+  armourPiercing: 0
   damage: 10
   visibleToEnemy: 0
+  crouching: 0
   defaultMaterial: {fileID: 0}
   aiScript: {fileID: 0}
   animManager: {fileID: 3365535220338891212}
   slider: {fileID: 2284200989218529419}
   weaponRange: {fileID: 1274891700334688110}
+  unitModel: {fileID: 2954473873460935742}
   path:
   - {fileID: 0}
   - {fileID: 0}
@@ -1691,8 +1695,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7947995386996991880}
-  m_Father: {fileID: 3365535220338656738}
-  m_RootOrder: 6
+  m_Father: {fileID: 1573326721525388742}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7945272522848550586
 MonoBehaviour:

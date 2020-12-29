@@ -9,6 +9,7 @@ public class Turn_Script : MonoBehaviour
     public List<AI_Follower_Script> badList;
     private bool actionsLeft = false;
     public AI_Script aiScript;
+    public AI_Behaviour_Script aiBehaviour;
 
     public AI_Follower_Script newUnit;
 
@@ -57,10 +58,14 @@ public class Turn_Script : MonoBehaviour
 
         aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
         aiScript.aiEntity = GetNextUnit().gameObject;
-        CheckVisibleEnemies();
-        aiScript.DistanceTemplate();
-        aiScript.cameraTrolley.transform.position = aiScript.aiEntity.transform.position;
-        aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+
+        if (currentTeam == 0)
+        {
+            CheckVisibleEnemies();
+            aiScript.DistanceTemplate();
+            aiScript.cameraTrolley.transform.position = aiScript.aiEntity.transform.position;
+            aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+        }
     }
 
     public AI_Follower_Script GetNextUnit()
@@ -75,6 +80,7 @@ public class Turn_Script : MonoBehaviour
                 {
                     newUnit = fol;
                     currentTeam = 1;
+                    aiBehaviour.TakeAction(newUnit);
                     break;
                 }
             }
@@ -105,6 +111,7 @@ public class Turn_Script : MonoBehaviour
                         {
                             newUnit = fol;
                             currentTeam = 1;
+                            aiBehaviour.TakeAction(newUnit);
                             break;
                         }
                     }
@@ -151,13 +158,13 @@ public class Turn_Script : MonoBehaviour
                     {
                         if (bad.visibleToEnemy == false)
                         {
-                            bad.gameObject.SetActive(false);
+                            bad.unitModel.SetActive(false);
                         }
                     }
                     else
                     {
                         bad.visibleToEnemy = true;
-                        bad.gameObject.SetActive(true);
+                        bad.unitModel.SetActive(true);
                         if (bad.crouching)
                         {
                             bad.animManager.Crouch(true);
@@ -183,13 +190,13 @@ public class Turn_Script : MonoBehaviour
                     {
                         if (bad.visibleToEnemy == false)
                         {
-                            bad.gameObject.SetActive(false);
+                            bad.unitModel.SetActive(false);
                         }
                     }
                     else
                     {
                         bad.visibleToEnemy = true;
-                        bad.gameObject.SetActive(true);
+                        bad.unitModel.SetActive(true);
                         if (bad.crouching)
                         {
                             bad.animManager.Crouch(true);

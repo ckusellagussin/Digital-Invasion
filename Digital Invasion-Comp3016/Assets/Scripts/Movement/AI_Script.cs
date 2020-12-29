@@ -253,6 +253,7 @@ public class AI_Script : MonoBehaviour
         FindTemplate();
     }
 
+
     private List<Chunk_Script> FindPath(GameObject endChunk)
     {
         Vector3 raycastPoint = new Vector3(0, 0.2f, 0);
@@ -294,6 +295,73 @@ public class AI_Script : MonoBehaviour
                 {
                     int tentativeGCost = currentChunk.gCost + CalculateDistanceCost(currentChunk, neighbour);
                     if (tentativeGCost < neighbour.gCost && tentativeGCost <= aiEntity.GetComponent<AI_Follower_Script>().maxDistance)
+                    {
+                        if (!neighbour.impassable)
+                        {
+                            neighbour.fromChunk = currentChunk;
+                            neighbour.gCost = tentativeGCost;
+                            neighbour.hCost = CalculateDistanceCost(neighbour, endChunk.GetComponent<Chunk_Script>());
+                            neighbour.CalcFCost();
+
+                            if (!openPath.Contains(neighbour))
+                            {
+                                openPath.Add(neighbour);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public List<Chunk_Script> FindPathAI(GameObject endChunk, GameObject unit)
+    {
+        Vector3 raycastPoint = new Vector3(0, 0.2f, 0);
+        Ray ray = new Ray(unit.transform.position + raycastPoint, -unit.transform.up);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.CompareTag("Chunk"))
+            {
+                startChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
+            }
+        }
+
+        openPath = new List<Chunk_Script>();
+        closedPath = new List<Chunk_Script>();
+
+        openPath.Add(startChunk);
+
+        startChunk.gCost = 0;
+        startChunk.hCost = CalculateDistanceCost(startChunk, endChunk.GetComponent<Chunk_Script>());
+        startChunk.CalcFCost();
+
+        while (openPath.Count > 0)
+        {
+            Chunk_Script currentChunk = GetLowestFCost(openPath);
+            if (currentChunk == endChunk.GetComponent<Chunk_Script>())
+            {
+                return closedPath;
+            }
+            //else if(currentChunk.gCost >= unit.GetComponent<AI_Follower_Script>().maxDistance)
+            //{
+            //    closedPath.RemoveAt(closedPath.Count - 1);
+            //    return closedPath;
+            //}
+
+            openPath.Remove(currentChunk);
+            closedPath.Add(currentChunk);
+
+            foreach (Chunk_Script neighbour in GetNeighbourList(currentChunk))
+            {
+                if (closedPath.Contains(neighbour)) continue;
+
+                if (neighbour != null)
+                {
+                    int tentativeGCost = currentChunk.gCost + CalculateDistanceCost(currentChunk, neighbour);
+                    if (tentativeGCost <= neighbour.gCost)
                     {
                         if (!neighbour.impassable)
                         {
@@ -428,7 +496,7 @@ public class AI_Script : MonoBehaviour
         }
     }
 
-    private List<Chunk_Script> CalculatePath(Chunk_Script endChunk)
+    public List<Chunk_Script> CalculatePath(Chunk_Script endChunk)
     {
         List<Chunk_Script> path = new List<Chunk_Script>();
         path.Add(endChunk);
@@ -443,7 +511,7 @@ public class AI_Script : MonoBehaviour
         return path;
     }
 
-    private void SetGrid()
+    public void SetGrid()
     {
         foreach(Chunk_Script cs in grid.chunksL)
         { 
@@ -458,7 +526,7 @@ public class AI_Script : MonoBehaviour
         return grid.GetChunk(x, z);
     }
 
-    private int CalculateDistanceCost(Chunk_Script a, Chunk_Script b)
+    public int CalculateDistanceCost(Chunk_Script a, Chunk_Script b)
     {
         int cost = 0;
 
@@ -514,6 +582,7 @@ public class AI_Script : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
         aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+
         if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
         {
             aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
@@ -521,9 +590,12 @@ public class AI_Script : MonoBehaviour
         }
         unitCamera.enabled = false;
         mainCamera.enabled = true;
-        cameraTrolley.transform.position = aiEntity.transform.position;
-        DistanceTemplate();
-        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
-        turnScript.CheckVisibleEnemies();
+        if (turnScript.currentTeam == 0)
+        {
+            cameraTrolley.transform.position = aiEntity.transform.position;
+            DistanceTemplate();
+            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+            turnScript.CheckVisibleEnemies();
+        }
     }
 }

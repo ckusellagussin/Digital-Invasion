@@ -29,7 +29,8 @@ public class AI_Follower_Script : MonoBehaviour
     public Animation_Manager animManager;
     public Slider slider;
     public GameObject weaponRange;
-    
+    public GameObject unitModel;
+
 
     [SerializeField]
     private List<Chunk_Script> path;
@@ -151,10 +152,13 @@ public class AI_Follower_Script : MonoBehaviour
                 {
                     aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                     aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
-                    turnScript.CheckVisibleEnemies();
-                    aiScript.DistanceTemplate();
-                    turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
-                    aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+                    if (turnScript.currentTeam == 0)
+                    {
+                        turnScript.CheckVisibleEnemies();
+                        aiScript.DistanceTemplate();
+                        turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
+                        aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+                    }
                 }
             }
         }
