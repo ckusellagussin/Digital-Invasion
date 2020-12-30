@@ -143,12 +143,16 @@ public class AI_Follower_Script : MonoBehaviour
                 {
                     animManager.Run(false);
                 }
-                if (actions > 0)
+                if (actions > 0 && turnScript.currentTeam == 0)
                 {
                     aiScript.DistanceTemplate();
                     turnScript.CheckVisibleEnemies();
                 }
-                if (GetActions() == 0)
+                else if(actions > 0 && turnScript.currentTeam == 1)
+                {
+                    aiScript.behaviourScript.TakeAction(aiScript.aiEntity.GetComponent<AI_Follower_Script>());
+                }
+                else if (GetActions() == 0)
                 {
                     aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                     aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
@@ -158,6 +162,10 @@ public class AI_Follower_Script : MonoBehaviour
                         aiScript.DistanceTemplate();
                         turnScript.aiScript.cameraTrolley.transform.position = turnScript.aiScript.aiEntity.transform.position;
                         aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+                    }
+                    else
+                    {
+                        aiScript.behaviourScript.TakeAction(aiScript.aiEntity.GetComponent<AI_Follower_Script>());
                     }
                 }
             }

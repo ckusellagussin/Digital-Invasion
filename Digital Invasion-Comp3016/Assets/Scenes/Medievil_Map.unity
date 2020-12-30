@@ -15635,6 +15635,11 @@ PrefabInstance:
       propertyPath: renderer
       value: 
       objectReference: {fileID: 1917078595}
+    - target: {fileID: 8468278310533389048, guid: 0049ca793ffdf8a498f47f196c03e390,
+        type: 3}
+      propertyPath: behaviourScript
+      value: 
+      objectReference: {fileID: 1917078596}
     - target: {fileID: 8468278310533389049, guid: 0049ca793ffdf8a498f47f196c03e390,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25470,6 +25475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiScript: {fileID: 1306940413}
   turnScript: {fileID: 1917078594}
+  shootingScript: {fileID: 0}
   path: []
   truePath: []
 --- !u!1 &1919868403

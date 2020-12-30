@@ -66,6 +66,10 @@ public class Turn_Script : MonoBehaviour
             aiScript.cameraTrolley.transform.position = aiScript.aiEntity.transform.position;
             aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
         }
+        else
+        {
+            aiScript.behaviourScript.TakeAction(aiScript.aiEntity.GetComponent<AI_Follower_Script>());
+        }
     }
 
     public AI_Follower_Script GetNextUnit()
@@ -80,7 +84,6 @@ public class Turn_Script : MonoBehaviour
                 {
                     newUnit = fol;
                     currentTeam = 1;
-                    aiBehaviour.TakeAction(newUnit);
                     break;
                 }
             }
@@ -111,7 +114,6 @@ public class Turn_Script : MonoBehaviour
                         {
                             newUnit = fol;
                             currentTeam = 1;
-                            aiBehaviour.TakeAction(newUnit);
                             break;
                         }
                     }

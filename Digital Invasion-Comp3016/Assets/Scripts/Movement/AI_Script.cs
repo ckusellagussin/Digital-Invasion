@@ -30,6 +30,7 @@ public class AI_Script : MonoBehaviour
     private Shooting_Script shooter;
 
     public Turn_Script turnScript;
+    public AI_Behaviour_Script behaviourScript;
 
     // Start is called before the first frame update
     void Start()
@@ -227,7 +228,7 @@ public class AI_Script : MonoBehaviour
                 }
                 else
                 {
-                    if (selectedObject != null)
+                    if (selectedObject != null && (selectedObject.tag != "Bad Guy" || selectedObject.tag != "Good Guy"))
                     {
                         selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
                     }
@@ -576,10 +577,21 @@ public class AI_Script : MonoBehaviour
         unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
         StartCoroutine(DelayedUnitSwitch(2.5f));
     }
+    public void ConfirmShot(GameObject unit, GameObject target)
+    {
+        shooter.Shoot(target, unit);
+        aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
+        mainCamera.enabled = false;
+        unitCamera.enabled = true;
+        renderer.enabled = false;
+        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(true);
+        unitCamera.transform.rotation = aiEntity.transform.rotation;
+        unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
+        StartCoroutine(DelayedUnitSwitch(2.5f, "AI"));
+    }
 
     IEnumerator DelayedUnitSwitch(float delay)
     {
-
         yield return new WaitForSeconds(delay);
         aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
 
@@ -596,6 +608,35 @@ public class AI_Script : MonoBehaviour
             DistanceTemplate();
             aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
             turnScript.CheckVisibleEnemies();
+        }
+        else
+        {
+            behaviourScript.TakeAction(aiEntity.GetComponent<AI_Follower_Script>());
+        }
+    }
+
+    IEnumerator DelayedUnitSwitch(float delay, string forAI)
+    {
+        yield return new WaitForSeconds(delay);
+        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+
+        if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
+        {
+            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
+            aiEntity = turnScript.GetNextUnit().gameObject;
+        }
+        unitCamera.enabled = false;
+        mainCamera.enabled = true;
+        if (turnScript.currentTeam == 0)
+        {
+            cameraTrolley.transform.position = aiEntity.transform.position;
+            DistanceTemplate();
+            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+            turnScript.CheckVisibleEnemies();
+        }
+        else
+        {
+            behaviourScript.TakeAction(aiEntity.GetComponent<AI_Follower_Script>());
         }
     }
 }
