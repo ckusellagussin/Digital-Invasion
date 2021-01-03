@@ -41,93 +41,67 @@ public class AI_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (turnScript.currentTeam == 0)
         {
-            if (selectedObject != null)
+            if (Input.GetMouseButtonDown(1))
             {
-                if (selectedObject.GetComponent<MeshRenderer>() != null)
+                if (selectedObject != null)
                 {
-                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                    if (selectedObject.GetComponent<MeshRenderer>() != null)
+                    {
+                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                    }
+                    selectedObject = null;
                 }
-                selectedObject = null;
-            }
 
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 0)
+                if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.CompareTag("Chunk"))
+                    if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() > 0)
                     {
-                        SetGrid();
-                        endChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
+                        if (hit.collider.CompareTag("Chunk"))
+                        {
+                            SetGrid();
+                            endChunk = hit.collider.gameObject.GetComponent<Chunk_Script>();
 
-                        if (!endChunk.impassable && !endChunk.lowCover)
-                        {
-                            path = FindPath(endChunk.gameObject);
-                            if (path != null)
+                            if (!endChunk.impassable && !endChunk.lowCover)
                             {
-                                path = CalculatePath(endChunk);
-                                MoveUnit(path);
-                                cameraTrolley.transform.position = endChunk.transform.position;
-                                aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
-                                if (aiEntity.GetComponent<AI_Follower_Script>().animManager.anim.GetBool("Running") == false)
+                                path = FindPath(endChunk.gameObject);
+                                if (path != null)
                                 {
-                                    aiEntity.GetComponent<AI_Follower_Script>().animManager.Run(true);
-                                }
-                                if (selectedObject != null)
-                                {
-                                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
-                                }
-                                foreach(Chunk_Script cs in GetNeighbourList(endChunk))
-                                {
-                                    if(cs.lowCover)
+                                    path = CalculatePath(endChunk);
+                                    MoveUnit(path);
+                                    cameraTrolley.transform.position = endChunk.transform.position;
+                                    aiEntity.GetComponent<AI_Follower_Script>().TakeAction(1);
+                                    if (aiEntity.GetComponent<AI_Follower_Script>().animManager.anim.GetBool("Running") == false)
                                     {
-                                        aiEntity.GetComponent<AI_Follower_Script>().animManager.Crouch(true);
-                                        aiEntity.GetComponent<AI_Follower_Script>().crouching = true;
-                                        break;
+                                        aiEntity.GetComponent<AI_Follower_Script>().animManager.Run(true);
                                     }
-                                    else
+                                    if (selectedObject != null)
                                     {
-                                        aiEntity.GetComponent<AI_Follower_Script>().crouching = false;
-                                        aiEntity.GetComponent<AI_Follower_Script>().animManager.Crouch(false);
+                                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
                                     }
+                                    foreach (Chunk_Script cs in GetNeighbourList(endChunk))
+                                    {
+                                        if (cs.lowCover)
+                                        {
+                                            aiEntity.GetComponent<AI_Follower_Script>().animManager.Crouch(true);
+                                            aiEntity.GetComponent<AI_Follower_Script>().crouching = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            aiEntity.GetComponent<AI_Follower_Script>().crouching = false;
+                                            aiEntity.GetComponent<AI_Follower_Script>().animManager.Crouch(false);
+                                        }
+                                    }
+                                    renderer.enabled = false;
                                 }
-                                renderer.enabled = false;
                             }
                         }
-                    }
-                    else if (hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
-                    {
-                        float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
-                        if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
-                        {
-                            cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
-                            if (selectedObject == null)
-                            {
-                                selectedObject = hit.collider.gameObject;
-                                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
-                            }
-                            else
-                            {
-                                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
-                                selectedObject = hit.collider.gameObject;
-                                selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
-                            }
-                            Vector3[] positions = new Vector3[] {
-                                    aiEntity.transform.position,
-                                    selectedObject.transform.position
-                                };
-                            renderer.SetPositions(positions);
-                            renderer.enabled = true;
-                            shooter.ShowButton(true);
-                        }
-                    }
-                    else if(hit.collider.CompareTag("Good Guy"))
-                    {
-                        if (aiEntity.GetComponent<AI_Follower_Script>().turnScript.currentTeam == 1)
+                        else if (hit.collider.CompareTag("Tall Cover") || hit.collider.CompareTag("Low Cover"))
                         {
                             float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
                             if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
@@ -136,10 +110,13 @@ public class AI_Script : MonoBehaviour
                                 if (selectedObject == null)
                                 {
                                     selectedObject = hit.collider.gameObject;
+                                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
                                 }
                                 else
                                 {
+                                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
                                     selectedObject = hit.collider.gameObject;
+                                    selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial("Selected");
                                 }
                                 Vector3[] positions = new Vector3[] {
                                     aiEntity.transform.position,
@@ -149,90 +126,116 @@ public class AI_Script : MonoBehaviour
                                 renderer.enabled = true;
                                 shooter.ShowButton(true);
                             }
+                        }
+                        else if (hit.collider.CompareTag("Good Guy"))
+                        {
+                            if (aiEntity.GetComponent<AI_Follower_Script>().turnScript.currentTeam == 1)
+                            {
+                                float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
+                                if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
+                                {
+                                    cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                                    if (selectedObject == null)
+                                    {
+                                        selectedObject = hit.collider.gameObject;
+                                    }
+                                    else
+                                    {
+                                        selectedObject = hit.collider.gameObject;
+                                    }
+                                    Vector3[] positions = new Vector3[] {
+                                    aiEntity.transform.position,
+                                    selectedObject.transform.position
+                                };
+                                    renderer.SetPositions(positions);
+                                    renderer.enabled = true;
+                                    shooter.ShowButton(true);
+                                }
+                            }
+                        }
+                        else if (hit.collider.CompareTag("Bad Guy"))
+                        {
+                            if (aiEntity.GetComponent<AI_Follower_Script>().turnScript.currentTeam == 0)
+                            {
+                                float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
+                                if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
+                                {
+                                    cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
+                                    if (selectedObject == null)
+                                    {
+                                        selectedObject = hit.collider.gameObject;
+                                    }
+                                    else
+                                    {
+                                        selectedObject = hit.collider.gameObject;
+                                    }
+                                    Vector3[] positions = new Vector3[] {
+                                    aiEntity.transform.position,
+                                    selectedObject.transform.position
+                                };
+                                    renderer.SetPositions(positions);
+                                    renderer.enabled = true;
+                                    shooter.ShowButton(true);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                            renderer.enabled = false;
+                        }
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.CompareTag("Good Guy"))
+                    {
+                        if (turnScript.currentTeam == 0 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
+                        {
+                            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
+                            aiEntity = hit.collider.gameObject;
+                            turnScript.CheckVisibleEnemies();
+                            cameraTrolley.transform.position = aiEntity.transform.position;
+                            DistanceTemplate();
+                            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+                        }
+                        else
+                        {
+                            cameraTrolley.transform.position = aiEntity.transform.position;
+                            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                         }
                     }
                     else if (hit.collider.CompareTag("Bad Guy"))
                     {
-                        if (aiEntity.GetComponent<AI_Follower_Script>().turnScript.currentTeam == 0)
+                        if (turnScript.currentTeam == 1 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
                         {
-                            float distance = Vector3.Distance(hit.collider.gameObject.transform.position, aiEntity.transform.position);
-                            if (distance < aiEntity.GetComponent<AI_Follower_Script>().maxRange)
-                            {
-                                cameraTrolley.transform.position = hit.collider.gameObject.transform.position;
-                                if (selectedObject == null)
-                                {
-                                    selectedObject = hit.collider.gameObject;
-                                }
-                                else
-                                {
-                                    selectedObject = hit.collider.gameObject;
-                                }
-                                Vector3[] positions = new Vector3[] {
-                                    aiEntity.transform.position,
-                                    selectedObject.transform.position
-                                };
-                                renderer.SetPositions(positions);
-                                renderer.enabled = true;
-                                shooter.ShowButton(true);
-                            }
+                            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
+                            aiEntity = hit.collider.gameObject;
+                            turnScript.CheckVisibleEnemies();
+                            cameraTrolley.transform.position = aiEntity.transform.position;
+                            DistanceTemplate();
+                            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
+                        }
+                        else
+                        {
+                            cameraTrolley.transform.position = aiEntity.transform.position;
+                            aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
                         }
                     }
                     else
                     {
-                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                        if (selectedObject != null && (selectedObject.tag != "Bad Guy" && selectedObject.tag != "Good Guy"))
+                        {
+                            selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
+                        }
                         renderer.enabled = false;
                     }
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.CompareTag("Good Guy"))
-                {
-                    if (turnScript.currentTeam == 0 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
-                    {
-                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
-                        aiEntity = hit.collider.gameObject;
-                        turnScript.CheckVisibleEnemies();
-                        cameraTrolley.transform.position = aiEntity.transform.position;
-                        DistanceTemplate();
-                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
-                    } 
-                    else
-                    {
-                        cameraTrolley.transform.position = aiEntity.transform.position;
-                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
-                    }
-                }
-                else if (hit.collider.CompareTag("Bad Guy"))
-                {
-                    if (turnScript.currentTeam == 1 && aiEntity.GetComponent<AI_Follower_Script>().GetActions() != 1)
-                    {
-                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
-                        aiEntity = hit.collider.gameObject;
-                        turnScript.CheckVisibleEnemies();
-                        cameraTrolley.transform.position = aiEntity.transform.position;
-                        DistanceTemplate();
-                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
-                    }
-                    else
-                    {
-                        cameraTrolley.transform.position = aiEntity.transform.position;
-                        aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(true);
-                    }
-                }
-                else
-                {
-                    if (selectedObject != null && (selectedObject.tag != "Bad Guy" || selectedObject.tag != "Good Guy"))
-                    {
-                        selectedObject.GetComponent<MeshRenderer>().material = materialContainer.FindMaterial(selectedObject.tag);
-                    }
-                    renderer.enabled = false;
                 }
             }
         }
@@ -567,7 +570,9 @@ public class AI_Script : MonoBehaviour
 
     public void ConfirmShot()
     {
-        shooter.Shoot(selectedObject, aiEntity);
+        Vector3 prevPosition = aiEntity.transform.position;
+        Vector3 newPos = shooter.Shoot(selectedObject, aiEntity);
+        aiEntity.transform.position = newPos;
         aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
         mainCamera.enabled = false;
         unitCamera.enabled = true;
@@ -575,25 +580,29 @@ public class AI_Script : MonoBehaviour
         aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(true);
         unitCamera.transform.rotation = aiEntity.transform.rotation;
         unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
-        StartCoroutine(DelayedUnitSwitch(2.5f));
-    }
-    public void ConfirmShot(GameObject unit, GameObject target)
-    {
-        shooter.Shoot(target, unit);
-        aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
-        mainCamera.enabled = false;
-        unitCamera.enabled = true;
-        renderer.enabled = false;
-        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(true);
-        unitCamera.transform.rotation = aiEntity.transform.rotation;
-        unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
-        StartCoroutine(DelayedUnitSwitch(2.5f, "AI"));
+        StartCoroutine(DelayedUnitSwitch(2.5f, aiEntity, prevPosition));
     }
 
-    IEnumerator DelayedUnitSwitch(float delay)
+    public void ConfirmShot(GameObject unit, GameObject target)
+    {
+        Vector3 prevPosition = aiEntity.transform.position;
+        Vector3 newPos = shooter.Shoot(target, unit);
+        aiEntity.transform.position = newPos;
+        aiEntity.GetComponent<AI_Follower_Script>().TakeAction(2);
+        mainCamera.enabled = false;
+        unitCamera.enabled = true;
+        renderer.enabled = false;
+        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(true);
+        unitCamera.transform.rotation = aiEntity.transform.rotation;
+        unitCamera.transform.position = aiEntity.transform.position + (aiEntity.transform.right / 2) + (aiEntity.transform.up * 1.7f) + (-aiEntity.transform.forward);
+        StartCoroutine(DelayedUnitSwitch(2.5f, "AI", aiEntity, prevPosition));
+    }
+
+    IEnumerator DelayedUnitSwitch(float delay, GameObject aiUnit, Vector3 position)
     {
         yield return new WaitForSeconds(delay);
-        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+        aiUnit.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+        aiUnit.transform.position = position;
 
         if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
         {
@@ -615,10 +624,11 @@ public class AI_Script : MonoBehaviour
         }
     }
 
-    IEnumerator DelayedUnitSwitch(float delay, string forAI)
+    IEnumerator DelayedUnitSwitch(float delay, string forAI, GameObject aiUnit, Vector3 position)
     {
         yield return new WaitForSeconds(delay);
-        aiEntity.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+        aiUnit.GetComponent<AI_Follower_Script>().animManager.Shoot(false);
+        aiUnit.transform.position = position;
 
         if (aiEntity.GetComponent<AI_Follower_Script>().GetActions() == 0)
         {

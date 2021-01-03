@@ -11,6 +11,7 @@ public class Bullet_Mover_Script : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * Time.deltaTime * speed;
+        Physics.IgnoreLayerCollision(9,10);
     }
 
     public void DestroyIn30()
@@ -28,5 +29,10 @@ public class Bullet_Mover_Script : MonoBehaviour
         {
             Invoke("DestroyIn30", 1.0f);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
     }
 }

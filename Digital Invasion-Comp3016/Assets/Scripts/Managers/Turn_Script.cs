@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Turn_Script : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Turn_Script : MonoBehaviour
     public AI_Follower_Script newUnit;
 
     public int currentTeam = 0;
+
+    public Image enemyTurn;
 
     void Start()
     {
@@ -84,6 +87,7 @@ public class Turn_Script : MonoBehaviour
                 {
                     newUnit = fol;
                     currentTeam = 1;
+                    enemyTurn.enabled = true;
                     break;
                 }
             }
@@ -97,6 +101,7 @@ public class Turn_Script : MonoBehaviour
                 {
                     newUnit = fol;
                     currentTeam = 0;
+                    enemyTurn.enabled = false;
                     break;
                 }
             }
@@ -114,6 +119,7 @@ public class Turn_Script : MonoBehaviour
                         {
                             newUnit = fol;
                             currentTeam = 1;
+                            enemyTurn.enabled = true;
                             break;
                         }
                     }
@@ -127,6 +133,7 @@ public class Turn_Script : MonoBehaviour
                         {
                             newUnit = fol;
                             currentTeam = 0;
+                            enemyTurn.enabled = false;
                             break;
                         }
                     }

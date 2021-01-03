@@ -47,6 +47,13 @@ public class Shooting_Script : MonoBehaviour
                         Debug.Log("Shoot Button");
                     }
                 }
+                if(results.Count == 0)
+                {
+                    if (changeable)
+                    {
+                        ShowButton(false);
+                    }
+                }
             }
             if (Input.GetMouseButtonDown(1))
             {
@@ -71,6 +78,13 @@ public class Shooting_Script : MonoBehaviour
                         Debug.Log("Shoot Button");
                     }
                 }
+                if (results.Count == 0)
+                {
+                    if (changeable)
+                    {
+                        ShowButton(false);
+                    }
+                }
             }
         }
     }
@@ -87,14 +101,16 @@ public class Shooting_Script : MonoBehaviour
         changeable = true;
     }
 
-    public void Shoot(GameObject target, GameObject shooter)
+    public Vector3 Shoot(GameObject target, GameObject shooter)
     {
         AI_Follower_Script shooterUnit = shooter.GetComponent<AI_Follower_Script>();
 
-        GameObject bulletTemp = Instantiate(bulletPrefab, shooterUnit.transform);
-        bulletTemp.transform.position = shooterUnit.transform.position + (shooterUnit.transform.up);
-        bulletTemp.transform.rotation = shooterUnit.transform.rotation;
-        bulletTemp.GetComponent<Bullet_Mover_Script>().DestroyIn30();
+        Vector3 newPos = new Vector3(0,0,0);
+
+        for (float i = 0; i < 2; i += 0.3f)
+        {
+            StartCoroutine(DelayedSpawn(i, shooterUnit));
+        }
 
         Vector3 up1 = new Vector3(0, 0.5f);
         RaycastHit[] hits;
@@ -128,6 +144,7 @@ public class Shooting_Script : MonoBehaviour
                                 else
                                 {
                                     ShootRound(target, shooter, shooter.transform.position);
+                                    newPos = shooter.transform.position;
                                     Debug.Log("Attempted and didn't hit cover");
                                     shooter.transform.position += -shooter.transform.right;
                                     break;
@@ -136,6 +153,7 @@ public class Shooting_Script : MonoBehaviour
                             else
                             {
                                 ShootRound(target, shooter, shooter.transform.position);
+                                newPos = shooter.transform.position;
                                 Debug.Log("Attempted and didn't hit cover");
                                 shooter.transform.position += -shooter.transform.right;
                                 break;
@@ -153,12 +171,14 @@ public class Shooting_Script : MonoBehaviour
                                 {
                                     Debug.Log("Attempted and hit cover still");
                                     Debug.Log("Hit Tall Cover");
-                                    h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                                    shot = false;
+                                    StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                                     break;
                                 }
                                 else
                                 {
                                     ShootRound(target, shooter, shooter.transform.position);
+                                    newPos = shooter.transform.position;
                                     Debug.Log("Attempted and didn't hit cover");
                                     shooter.transform.position += shooter.transform.right;
                                     break;
@@ -167,6 +187,7 @@ public class Shooting_Script : MonoBehaviour
                             else
                             {
                                 ShootRound(target, shooter, shooter.transform.position);
+                                newPos = shooter.transform.position;
                                 Debug.Log("Attempted and didn't hit cover");
                                 shooter.transform.position += shooter.transform.right;
                                 break;
@@ -176,37 +197,52 @@ public class Shooting_Script : MonoBehaviour
                     else
                     {
                         Debug.Log("Hit Tall Cover");
-                        h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                        StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
+                        shot = false;
+                        newPos = shooterUnit.transform.position;
                         break;
                     }
                 }
                 else if (h.collider.tag == "Low Cover")
                 {
-                    if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5)
+                    if (distance - Vector3.Distance(target.transform.position, h.transform.position) <= 0.5)
                     {
                         Debug.Log("Hit Low Cover");
-                        h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                        StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
+                        shot = false;
+                        newPos = shooterUnit.transform.position;
                         break;
                     }
-                    else if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5)
+                    else if (distance - Vector3.Distance(target.transform.position, h.transform.position) <= 1.5)
                     {
                         if (target.tag == "Good Guy" ||  target.tag == "Bad Guy")
                         {
                             Debug.Log("Hit Low Cover");
-                            h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                            StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             shot = false;
+                            newPos = shooterUnit.transform.position;
                             break;
                         }
                         else if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5 && target.tag == "Low Cover")
                         {
                             Debug.Log("Hit Low Cover");
-                            h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                            StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
+                            shot = false;
+                            newPos = shooterUnit.transform.position;
                             break;
                         }
                         else
                         {
                             Debug.Log("Went Over Low Cover");
                         }
+                    }
+                    else if(target.transform == h.collider.gameObject.transform)
+                    {
+                        Debug.Log("Hit Low Cover");
+                        StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
+                        shot = false;
+                        newPos = shooterUnit.transform.position;
+                        break;
                     }
                     else
                     {
@@ -241,7 +277,10 @@ public class Shooting_Script : MonoBehaviour
         {
             shooterUnit.DealDamage(damagedUnit);
             Debug.Log("Hit Unit");
+            newPos = shooterUnit.transform.position;
         }
+
+        return newPos;
     }
 
     public void ShootRound(GameObject target, GameObject shooter, Vector3 newShooterTransform)
@@ -271,7 +310,8 @@ public class Shooting_Script : MonoBehaviour
                     else
                     {
                         Debug.Log("Hit Tall Cover");
-                        h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                        shot = false;
+                        StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         break;
                     }
                 }
@@ -280,7 +320,8 @@ public class Shooting_Script : MonoBehaviour
                     if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5)
                     {
                         Debug.Log("Hit Low Cover");
-                        h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                        shot = false;
+                        StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         break;
                     }
                     else if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5)
@@ -289,13 +330,14 @@ public class Shooting_Script : MonoBehaviour
                         {
                             Debug.Log("Hit Low Cover");
                             shot = false;
-                            h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                            StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             break;
                         }
                         else if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5 && target.tag == "Low Cover")
                         {
                             Debug.Log("Hit Low Cover");
-                            h.collider.gameObject.GetComponent<Cover_Item>().TakeDamage();
+                            shot = false;
+                            StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             break;
                         }
                         else
@@ -339,4 +381,23 @@ public class Shooting_Script : MonoBehaviour
             Debug.Log("Hit Unit");
         }
     }
+
+
+    IEnumerator DelayedSpawn(float delay, AI_Follower_Script shooterUnit)
+    {
+        yield return new WaitForSeconds(delay);
+        GameObject bulletTemp = Instantiate(bulletPrefab, shooterUnit.transform);
+        Quaternion random = new Quaternion(shooterUnit.transform.rotation.x + Random.Range(-0.05f,0.05f), shooterUnit.transform.rotation.y + Random.Range(-0.05f, 0.05f), shooterUnit.transform.rotation.z, shooterUnit.transform.rotation.w);
+        bulletTemp.transform.position = shooterUnit.transform.position + (shooterUnit.transform.up);
+        bulletTemp.transform.rotation = random;
+        bulletTemp.GetComponent<Bullet_Mover_Script>().DestroyIn30();
+    }
+
+
+    IEnumerator DelayedDamage(float delay, GameObject damageReciever)
+    {
+        yield return new WaitForSeconds(delay);
+        damageReciever.GetComponent<Cover_Item>().TakeDamage();
+    }
+
 }
