@@ -205,7 +205,7 @@ public class Shooting_Script : MonoBehaviour
                 }
                 else if (h.collider.tag == "Low Cover")
                 {
-                    if (distance - Vector3.Distance(target.transform.position, h.transform.position) <= 0.5)
+                    if (Vector3.Distance(target.transform.position, h.transform.position) <= 0.5)
                     {
                         Debug.Log("Hit Low Cover");
                         StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
@@ -213,7 +213,7 @@ public class Shooting_Script : MonoBehaviour
                         newPos = shooterUnit.transform.position;
                         break;
                     }
-                    else if (distance - Vector3.Distance(target.transform.position, h.transform.position) <= 1.5)
+                    else if (Vector3.Distance(target.transform.position, h.transform.position) <= 1.5)
                     {
                         if (target.tag == "Good Guy" ||  target.tag == "Bad Guy")
                         {
