@@ -107,6 +107,8 @@ public class Shooting_Script : MonoBehaviour
 
         Vector3 newPos = new Vector3(0,0,0);
 
+        shooterUnit.aiScript.unitCamera.GetComponent<AudioSource>().Play();
+
         for (float i = 0; i < 2; i += 0.3f)
         {
             StartCoroutine(DelayedSpawn(i, shooterUnit));
@@ -172,6 +174,7 @@ public class Shooting_Script : MonoBehaviour
                                     Debug.Log("Attempted and hit cover still");
                                     Debug.Log("Hit Tall Cover");
                                     shot = false;
+                                    shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                                     StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                                     break;
                                 }
@@ -197,6 +200,7 @@ public class Shooting_Script : MonoBehaviour
                     else
                     {
                         Debug.Log("Hit Tall Cover");
+                        shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                         StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         shot = false;
                         newPos = shooterUnit.transform.position;
@@ -208,6 +212,7 @@ public class Shooting_Script : MonoBehaviour
                     if (Vector3.Distance(target.transform.position, h.transform.position) <= 0.5)
                     {
                         Debug.Log("Hit Low Cover");
+                        shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                         StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         shot = false;
                         newPos = shooterUnit.transform.position;
@@ -218,6 +223,7 @@ public class Shooting_Script : MonoBehaviour
                         if (target.tag == "Good Guy" ||  target.tag == "Bad Guy")
                         {
                             Debug.Log("Hit Low Cover");
+                            shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                             StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             shot = false;
                             newPos = shooterUnit.transform.position;
@@ -226,6 +232,7 @@ public class Shooting_Script : MonoBehaviour
                         else if (distance - Vector3.Distance(shooter.transform.position, h.transform.position) <= 0.5 && target.tag == "Low Cover")
                         {
                             Debug.Log("Hit Low Cover");
+                            shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                             StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             shot = false;
                             newPos = shooterUnit.transform.position;
@@ -239,6 +246,7 @@ public class Shooting_Script : MonoBehaviour
                     else if(target.transform == h.collider.gameObject.transform)
                     {
                         Debug.Log("Hit Low Cover");
+                        shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                         StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         shot = false;
                         newPos = shooterUnit.transform.position;
@@ -311,6 +319,7 @@ public class Shooting_Script : MonoBehaviour
                     {
                         Debug.Log("Hit Tall Cover");
                         shot = false;
+                        shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                         StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         break;
                     }
@@ -321,6 +330,7 @@ public class Shooting_Script : MonoBehaviour
                     {
                         Debug.Log("Hit Low Cover");
                         shot = false;
+                        shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                         StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                         break;
                     }
@@ -330,6 +340,7 @@ public class Shooting_Script : MonoBehaviour
                         {
                             Debug.Log("Hit Low Cover");
                             shot = false;
+                            shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                             StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             break;
                         }
@@ -337,6 +348,7 @@ public class Shooting_Script : MonoBehaviour
                         {
                             Debug.Log("Hit Low Cover");
                             shot = false;
+                            shooterUnit.aiScript.GetComponent<AudioSource>().Play();
                             StartCoroutine(DelayedDamage(1.0f, h.collider.gameObject));
                             break;
                         }

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5752902627401562361}
+  - component: {fileID: 5974275608065963930}
   m_Layer: 0
   m_Name: Colourful_OutsideWall
   m_TagString: Tall Cover
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5974275608065963930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266301487648678207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed2ec023250f64408e183e3f91e0378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkUnder: {fileID: 0}
+  lowCoverPrefab: {fileID: 0}
+  defaultMaterial: {fileID: 0}
+  yoffset: 0
 --- !u!65 &3778207466103436492
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59,6 +76,7 @@ MonoBehaviour:
   chunkUnder: {fileID: 0}
   lowCoverPrefab: {fileID: 1488401960033838646, guid: 021f9d4d5ff698c46955e68057a890d7,
     type: 3}
+  defaultMaterial: {fileID: 0}
   yoffset: 0
 --- !u!1 &9161457961536244346
 GameObject:

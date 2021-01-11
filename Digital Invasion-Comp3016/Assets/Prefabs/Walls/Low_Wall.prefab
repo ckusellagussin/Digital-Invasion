@@ -110,4 +110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkUnder: {fileID: 0}
   lowCoverPrefab: {fileID: 0}
+  defaultMaterial: {fileID: 0}
   yoffset: -0.2585

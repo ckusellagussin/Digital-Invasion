@@ -111,4 +111,5 @@ MonoBehaviour:
   chunkUnder: {fileID: 0}
   lowCoverPrefab: {fileID: 7677060812371241912, guid: 63147d1ecb885c747bb89640cb9a78c4,
     type: 3}
+  defaultMaterial: {fileID: 0}
   yoffset: 0

@@ -142,6 +142,7 @@ public class AI_Follower_Script : MonoBehaviour
                 if (animManager.anim.GetBool("Running") == true)
                 {
                     animManager.Run(false);
+                    GetComponent<AudioSource>().Stop();
                 }
                 if (actions > 0 && turnScript.currentTeam == 0)
                 {

@@ -78,6 +78,7 @@ public class AI_Script : MonoBehaviour
                                     if (aiEntity.GetComponent<AI_Follower_Script>().animManager.anim.GetBool("Running") == false)
                                     {
                                         aiEntity.GetComponent<AI_Follower_Script>().animManager.Run(true);
+                                        aiEntity.GetComponent<AudioSource>().Play();
                                     }
                                     if (selectedObject != null)
                                     {

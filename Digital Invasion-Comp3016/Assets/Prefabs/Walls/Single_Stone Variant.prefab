@@ -27,7 +27,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkUnder: {fileID: 0}
   lowCoverPrefab: {fileID: 0}
-  yoffset: -0.2585
+  defaultMaterial: {fileID: 0}
+  yoffset: -0.8
 --- !u!1001 &6869674982733287858
 PrefabInstance:
   m_ObjectHideFlags: 0

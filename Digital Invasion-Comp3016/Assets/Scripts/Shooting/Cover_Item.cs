@@ -17,7 +17,7 @@ public class Cover_Item : MonoBehaviour
 
     public void TakeDamage()
     {
-        if(gameObject.CompareTag("Tall Cover"))
+        if (gameObject.CompareTag("Tall Cover"))
         {
             GameObject replacement = Instantiate(lowCoverPrefab, transform.position, transform.rotation);
             gameObject.GetComponent<Collider>().enabled = false;
