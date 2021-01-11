@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1181496318985484708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273108710568116747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed2ec023250f64408e183e3f91e0378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkUnder: {fileID: 0}
+  lowCoverPrefab: {fileID: 3387245454757023633, guid: ea9288f9fb8cb14499794e34e5d5b26c,
+    type: 3}
+  defaultMaterial: {fileID: 0}
+  yoffset: 0
 --- !u!1001 &1873601563519624508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,7 +27,7 @@ PrefabInstance:
     - target: {fileID: 840663575913195319, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_Name
-      value: High_Wall (2)
+      value: High_Wall_Real
       objectReference: {fileID: 0}
     - target: {fileID: 840663575913195319, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
@@ -20,17 +37,17 @@ PrefabInstance:
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.152746
+      value: 1.011
       objectReference: {fileID: 0}
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
@@ -75,22 +92,29 @@ PrefabInstance:
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7775192904012249201, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 7.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8660011748334944137, guid: fc205d861d68a7d4198ea3851ee38c0d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f7c9ae938f305ea41978c1135278e3e8, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 864686134637698020, guid: fc205d861d68a7d4198ea3851ee38c0d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc205d861d68a7d4198ea3851ee38c0d, type: 3}
+--- !u!1 &1273108710568116747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 840663575913195319, guid: fc205d861d68a7d4198ea3851ee38c0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1873601563519624508}
+  m_PrefabAsset: {fileID: 0}
