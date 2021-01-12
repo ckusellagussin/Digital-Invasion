@@ -130,7 +130,7 @@ public class Shooting_Script : MonoBehaviour
             {
                 if (h.collider.tag == "Tall Cover")
                 {
-                    if(Vector3.Distance(shooter.transform.position, h.transform.position) <= 1.5 && target != h.collider.gameObject)
+                    if(Vector3.Distance(shooter.transform.position, h.transform.position) <= 2 && target != h.collider.gameObject)
                     {
                         RaycastHit hit;
                         shooter.transform.position += shooter.transform.right;

@@ -17,6 +17,8 @@ public class Turn_Script : MonoBehaviour
     public int currentTeam = 0;
 
     public Image enemyTurn;
+    public Image winScreen;
+    public Image loseScreen;
 
     void Start()
     {
@@ -142,6 +144,15 @@ public class Turn_Script : MonoBehaviour
             else
             {
                 Debug.Log("Somebody Won!");
+                
+                if(badList.Count == 0)
+                {
+                    winScreen.gameObject.SetActive(true);
+                }
+                else if (goodList.Count == 0)
+                {
+                    loseScreen.gameObject.SetActive(true);
+                }
             }
         }
 

@@ -30,6 +30,7 @@ public class Cover_Item : MonoBehaviour
         if (gameObject.CompareTag("Low Cover"))
         {
             gameObject.GetComponent<Collider>().enabled = false;
+            GetComponentInChildren<Cover_Item>().chunkUnder.CheckOnTop();
 
             Destroy(gameObject);
         }
