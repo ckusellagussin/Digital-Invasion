@@ -14706,20 +14706,21 @@ MonoBehaviour:
 
 
 
-    Stats:
+    Attributes:
 
-    Movement:15
+    Movement:
+    15
 
-    Armour:0
+    Armour: 0
 
-    Health:20
+    Health: 20
 
-    damage:10
+    Damage: 10
 
-    Vision:15
+    Vision: 15
 
     Firing
-    Range:15'
+    Range: 15'
 --- !u!222 &768620270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15030,20 +15031,20 @@ MonoBehaviour:
 
 
 
-    Stats:
+    Attributes:
 
-    Movement:8
+    Movement: 8
 
-    Armour:7
+    Armour:
+    7
 
-    Health:20
+    Health: 20
 
-    damage:15
+    Damage: 15
 
-    Vision:10
+    Vision: 10
 
-    Firing
-    Range:10'
+    Firing Range: 10'
 --- !u!222 &787100311
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25500,7 +25501,7 @@ GameObject:
   - component: {fileID: 1363643204}
   - component: {fileID: 1363643203}
   m_Layer: 5
-  m_Name: Unit 1 Text
+  m_Name: Rifleman Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25563,20 +25564,20 @@ MonoBehaviour:
 
 
 
-    Stats:
+    Attributes:
 
-    Movement:10
+    Movement: 10
 
-    Armour:5
+    Armour:
+    5
 
-    Health:20
+    Health: 20
 
-    damage:10
+    damage: 10
 
-    Vision:10
+    Vision: 10
 
-    Firing
-    Range:10'
+    Firing Range: 10'
 --- !u!222 &1363643204
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34731,20 +34732,21 @@ MonoBehaviour:
 
 
 
-    Stats:
+    Attributes:
 
-    Movement:10
+    Movement:
+    10
 
-    Armour:5
+    Armour: 5
 
-    Health:20
+    Health: 20
 
-    damage:15
+    Damage: 15
 
-    Vision:10
+    Vision: 10
 
     Firing
-    Range:5'
+    Range: 5'
 --- !u!222 &1927928903
 CanvasRenderer:
   m_ObjectHideFlags: 0
