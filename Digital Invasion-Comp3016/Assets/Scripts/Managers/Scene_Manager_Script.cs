@@ -7,11 +7,41 @@ public class Scene_Manager_Script : MonoBehaviour
 {
     public GameObject Page1;
     public GameObject Page2;
-
+    public GameObject BattleUI;
+    public GameObject Camera1;
+    public GameObject Camera2;
+    public Unit_Selection_Script UnitSelect;
+    public Turn_Script TurnScript;
+    public GameObject GoodGuy;
+    public GameObject BadGuy;
 
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        for (int i = 0; i < UnitSelect.toggles.Count; i++)
+        {
+            if (UnitSelect.toggles[i].isOn)
+            {
+                CreateGoodGuy();
+                Debug.Log("Good Guy made");
+            }
+            else
+            {
+                TurnScript.goodList.RemoveAt(i);
+                Debug.Log("Good Guy KILLED");
+            }
+        }
+        Camera2.SetActive(true);
+        Camera1.SetActive(false);
+        Page2.SetActive(false);
+        BattleUI.SetActive(true);
+    }
+
+    public void PlayAgain()
+    {
+        Camera1.SetActive(true);
+        Camera2.SetActive(false);
+        BattleUI.SetActive(false);
+        Page1.SetActive(true);
     }
 
     public void Quit()
@@ -35,5 +65,10 @@ public class Scene_Manager_Script : MonoBehaviour
             Page1.SetActive(false);
             Page2.SetActive(true);
         }
+    }
+
+    public void CreateGoodGuy()
+    {
+
     }
 }
