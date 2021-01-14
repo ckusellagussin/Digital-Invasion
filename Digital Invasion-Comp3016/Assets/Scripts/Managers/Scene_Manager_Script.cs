@@ -17,16 +17,25 @@ public class Scene_Manager_Script : MonoBehaviour
 
     public void Play()
     {
+        int ID = 0;
+        int negative = 0;
         for (int i = 0; i < UnitSelect.toggles.Count; i++)
         {
             if (UnitSelect.toggles[i].isOn)
             {
-                CreateGoodGuy();
+                CreateGoodGuy(ID, i);
+                ID += 1;
                 Debug.Log("Good Guy made");
             }
             else
             {
-                TurnScript.goodList.RemoveAt(i);
+                TurnScript.allList.Remove(TurnScript.goodList[i - negative]);
+                TurnScript.goodList[i - negative].gameObject.SetActive(false);
+                TurnScript.goodList.RemoveAt(i - negative);
+                TurnScript.allList.Remove(TurnScript.badList[i - negative]);
+                TurnScript.badList[i - negative].gameObject.SetActive(false);
+                TurnScript.badList.RemoveAt(i - negative);
+                negative += 1;
                 Debug.Log("Good Guy KILLED");
             }
         }
@@ -67,8 +76,20 @@ public class Scene_Manager_Script : MonoBehaviour
         }
     }
 
-    public void CreateGoodGuy()
+    public void CreateGoodGuy(int locator, int dropdownN)
     {
+
+        // Dropdown current = UnitScript.toggles[dropdownN].gameObject.GetCompontent<Dropdown>();
+        // if (current.value == 0){
+        // 
+        // TurnScript.goodList[locator].armour = 5; - Find a value
+        //
+        // set stats for rifleman
+        //}
+
+        // if (dropdown.value == 1){
+        // set stats for Scout
+        //}
 
     }
 }
