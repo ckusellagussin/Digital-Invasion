@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 9085617140936346533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340591186742742091}
   m_RootOrder: 0
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkUnder: {fileID: 0}
   lowCoverPrefab: {fileID: 0}
-  defaultMaterial: {fileID: 0}
+  defaultMaterial: {fileID: 2100000, guid: 74458b95ce65a8149ab8d42104dbdae6, type: 2}
   yoffset: -0.2585

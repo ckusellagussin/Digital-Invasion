@@ -24,6 +24,8 @@ public class Scene_Manager_Script : MonoBehaviour
             if (UnitSelect.toggles[i].isOn)
             {
                 CreateGoodGuy(ID, i);
+                TurnScript.goodList[ID].gameObject.SetActive(true);
+                TurnScript.badList[ID].gameObject.SetActive(true);
                 ID += 1;
                 Debug.Log("Good Guy made");
             }
@@ -60,7 +62,7 @@ public class Scene_Manager_Script : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     public void switch_Pages(int PageNo)
     {

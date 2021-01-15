@@ -40,6 +40,7 @@ public class AI_Behaviour_Script : MonoBehaviour
         } 
         else
         {
+            unit.unitModel.SetActive(true);
             aiScript.ConfirmShot(unit.gameObject, closestEnemy.gameObject);
         }
 

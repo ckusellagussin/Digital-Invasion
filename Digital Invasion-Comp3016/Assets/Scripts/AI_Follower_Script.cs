@@ -23,6 +23,8 @@ public class AI_Follower_Script : MonoBehaviour
     public bool visibleToEnemy;
     public bool crouching;
 
+    public int team;
+
     public Material defaultMaterial;
 
     public AI_Script aiScript;
@@ -155,6 +157,7 @@ public class AI_Follower_Script : MonoBehaviour
                 }
                 else if (GetActions() == 0)
                 {
+                    turnScript.currentTeam = team;
                     aiScript.aiEntity.GetComponent<AI_Follower_Script>().weaponRange.SetActive(false);
                     aiScript.aiEntity = turnScript.GetNextUnit().gameObject;
                     if (turnScript.currentTeam == 0)
