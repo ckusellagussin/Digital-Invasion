@@ -43,7 +43,7 @@ public class Unit_Selection_Script : MonoBehaviour
     public void DropdownChanged1(Dropdown Unit1)
     {
         Unit1Text.text = Classes[Unit1.value];
-        
+
 
     }
     public void DropdownChanged2(Dropdown Unit2)
