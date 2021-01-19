@@ -31408,17 +31408,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'A well sounded soldier, lightly armored balancing durablity and manuverablity
-    fireing at enemies from a fair distance
-
+  m_Text: 'A well rounded soldier, lightly armored balancing durablity and manuverablity
+    firing at enemies from a fair distance with armor piercing shots
 
 
     Stats:
 
-    Movement: 10
+    Movement:
+    10
 
-    Armour:
-    5
+    Armour: 5
 
     Health: 20
 
@@ -31426,7 +31425,8 @@ MonoBehaviour:
 
     Vision: 10
 
-    Firing Range: 10'
+    Firing
+    Range: 10'
 --- !u!222 &872059321
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41783,17 +41783,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'A well sounded soldier, lightly armored balancing durablity and manuverablity
-    fireing at enemies from a fair distance
-
+  m_Text: 'A well rounded soldier, lightly armored balancing durablity and manuverablity
+    firing at enemies from a fair distance with armor piercing shots
 
 
     Stats:
 
-    Movement: 10
+    Movement:
+    10
 
-    Armour:
-    5
+    Armour: 5
 
     Health: 20
 
@@ -41801,7 +41800,8 @@ MonoBehaviour:
 
     Vision: 10
 
-    Firing Range: 10'
+    Firing
+    Range: 10'
 --- !u!1001 &1146947495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49836,6 +49836,11 @@ PrefabInstance:
       propertyPath: armourPiercing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6087263342317513821, guid: cdbf4db6190e4344388fdfe15c7b16b7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdbf4db6190e4344388fdfe15c7b16b7, type: 3}
 --- !u!114 &1361687451 stripped
@@ -55154,17 +55159,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'A well sounded soldier, lightly armored balancing durablity and manuverablity
-    fireing at enemies from a fair distance
-
+  m_Text: 'A well rounded soldier, lightly armored balancing durablity and manuverablity
+    firing at enemies from a fair distance with armor piercing shots
 
 
     Stats:
 
-    Movement: 10
+    Movement:
+    10
 
-    Armour:
-    5
+    Armour: 5
 
     Health: 20
 
@@ -55172,7 +55176,8 @@ MonoBehaviour:
 
     Vision: 10
 
-    Firing Range: 10'
+    Firing
+    Range: 10'
 --- !u!1 &1490403882
 GameObject:
   m_ObjectHideFlags: 0
@@ -67903,6 +67908,11 @@ MonoBehaviour:
   - {fileID: 132317703}
   - {fileID: 1008291311}
   - {fileID: 854798662}
+  dropdowns:
+  - {fileID: 1962965362}
+  - {fileID: 993923432}
+  - {fileID: 728608379}
+  - {fileID: 1649368922}
   Unit1: {fileID: 1962965362}
   Unit2: {fileID: 993923432}
   Unit3: {fileID: 728608379}
@@ -75587,16 +75597,15 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'A well rounded soldier, lightly armored balancing durablity and manuverablity
-    fireing at enemies from a fair distance
-
+    firing at enemies from a fair distance with armor piercing shots
 
 
     Stats:
 
-    Movement: 10
+    Movement:
+    10
 
-    Armour:
-    5
+    Armour: 5
 
     Health: 20
 
@@ -75604,7 +75613,8 @@ MonoBehaviour:
 
     Vision: 10
 
-    Firing Range: 10'
+    Firing
+    Range: 10'
 --- !u!1 &2020439098
 GameObject:
   m_ObjectHideFlags: 0
@@ -78334,7 +78344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 16082eac329219e4daa1db7159b1c2ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a86c7eca3c4b968419cb255d17e5355f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Scene_Manager_Script : MonoBehaviour
 {
@@ -80,18 +81,56 @@ public class Scene_Manager_Script : MonoBehaviour
 
     public void CreateGoodGuy(int locator, int dropdownN)
     {
+        Debug.Log(locator);
+        Dropdown current = UnitSelect.dropdowns[dropdownN];
+        Debug.Log(current.value);
 
-        // Dropdown current = UnitScript.toggles[dropdownN].gameObject.GetCompontent<Dropdown>();
-        // if (current.value == 0){
-        // 
-        // TurnScript.goodList[locator].armour = 5; - Find a value
-        //
-        // set stats for rifleman
-        //}
+        if (current.value == 0)
+        {
 
-        // if (dropdown.value == 1){
-        // set stats for Scout
-        //}
+            TurnScript.goodList[locator].maxDistance = 100;
+            TurnScript.goodList[locator].viewDistance = 10;
+            TurnScript.goodList[locator].maxRange = 10;
+            TurnScript.goodList[locator].maxHealth = 20;
+            TurnScript.goodList[locator].armour = 5;
+            TurnScript.goodList[locator].armourPiercing = 3;
+            TurnScript.goodList[locator].damage = 10;
+    
+        }
+
+        if (current.value == 1)
+        {
+            //scout
+            TurnScript.goodList[locator].maxDistance = 150;
+            TurnScript.goodList[locator].viewDistance = 15;
+            TurnScript.goodList[locator].maxRange = 15;
+            TurnScript.goodList[locator].maxHealth = 20;
+            TurnScript.goodList[locator].armour = 0;
+            TurnScript.goodList[locator].armourPiercing = 0;
+            TurnScript.goodList[locator].damage = 10;
+        }
+        if (current.value == 2)
+        {
+            //specialist
+            TurnScript.goodList[locator].maxDistance = 100;
+            TurnScript.goodList[locator].viewDistance = 10;
+            TurnScript.goodList[locator].maxRange = 5;
+            TurnScript.goodList[locator].maxHealth = 20;
+            TurnScript.goodList[locator].armour = 5;
+            TurnScript.goodList[locator].armourPiercing = 0;
+            TurnScript.goodList[locator].damage = 15;
+        }
+        if (current.value == 3)
+        {
+            //support
+            TurnScript.goodList[locator].maxDistance = 80;
+            TurnScript.goodList[locator].viewDistance = 10;
+            TurnScript.goodList[locator].maxRange = 10;
+            TurnScript.goodList[locator].maxHealth = 20;
+            TurnScript.goodList[locator].armour = 7;
+            TurnScript.goodList[locator].armourPiercing = 5;
+            TurnScript.goodList[locator].damage = 10;
+        }
 
     }
 }
