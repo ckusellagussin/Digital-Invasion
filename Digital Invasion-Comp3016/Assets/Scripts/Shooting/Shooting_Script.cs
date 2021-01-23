@@ -109,11 +109,16 @@ public class Shooting_Script : MonoBehaviour
 
         shooterUnit.aiScript.unitCamera.GetComponent<AudioSource>().Play();
 
-        for (float i = 0; i < 2; i += 0.3f)
+        if (shooterUnit.unitClass != "Specialist")
         {
-            StartCoroutine(DelayedSpawn(i, shooterUnit));
+            for (float i = 0; i < 2; i += 0.3f)
+            {
+                StartCoroutine(DelayedSpawn(i, shooterUnit));
+            }
+        } else
+        {
+            StartCoroutine(DelayedSpawn(0.2f, shooterUnit));
         }
-
         Vector3 up1 = new Vector3(0, 0.5f);
         RaycastHit[] hits;
 
@@ -398,11 +403,25 @@ public class Shooting_Script : MonoBehaviour
     IEnumerator DelayedSpawn(float delay, AI_Follower_Script shooterUnit)
     {
         yield return new WaitForSeconds(delay);
-        GameObject bulletTemp = Instantiate(bulletPrefab, shooterUnit.transform);
-        Quaternion random = new Quaternion(shooterUnit.transform.rotation.x + Random.Range(-0.05f,0.05f), shooterUnit.transform.rotation.y + Random.Range(-0.05f, 0.05f), shooterUnit.transform.rotation.z, shooterUnit.transform.rotation.w);
-        bulletTemp.transform.position = shooterUnit.transform.position + (shooterUnit.transform.up);
-        bulletTemp.transform.rotation = random;
-        bulletTemp.GetComponent<Bullet_Mover_Script>().DestroyIn30();
+        if (shooterUnit.unitClass == "Specialist")
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                GameObject bulletTemp = Instantiate(bulletPrefab, shooterUnit.transform);
+                Quaternion random = new Quaternion(shooterUnit.transform.rotation.x + Random.Range(-0.05f, 0.05f), shooterUnit.transform.rotation.y + Random.Range(-0.05f, 0.05f), shooterUnit.transform.rotation.z, shooterUnit.transform.rotation.w);
+                bulletTemp.transform.position = shooterUnit.transform.position + (shooterUnit.transform.up);
+                bulletTemp.transform.rotation = random;
+                bulletTemp.GetComponent<Bullet_Mover_Script>().DestroyIn30();
+            }
+        }
+        else
+        {
+            GameObject bulletTemp = Instantiate(bulletPrefab, shooterUnit.transform);
+            Quaternion random = new Quaternion(shooterUnit.transform.rotation.x + Random.Range(-0.05f, 0.05f), shooterUnit.transform.rotation.y + Random.Range(-0.05f, 0.05f), shooterUnit.transform.rotation.z, shooterUnit.transform.rotation.w);
+            bulletTemp.transform.position = shooterUnit.transform.position + (shooterUnit.transform.up);
+            bulletTemp.transform.rotation = random;
+            bulletTemp.GetComponent<Bullet_Mover_Script>().DestroyIn30();
+        }
     }
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon_Controller_Script : MonoBehaviour
 {
     [SerializeField]
-    GameObject HandBone;
+    public GameObject HandBone;
 
     // Update is called once per frame
     void Update()

@@ -22,6 +22,7 @@ public class AI_Follower_Script : MonoBehaviour
     public float damage;
     public bool visibleToEnemy;
     public bool crouching;
+    public string unitClass;
 
     public int team;
 
@@ -32,6 +33,8 @@ public class AI_Follower_Script : MonoBehaviour
     public Slider slider;
     public GameObject weaponRange;
     public GameObject unitModel;
+    public GameObject weaponModel;
+    public Image classIcon;
 
 
     [SerializeField]

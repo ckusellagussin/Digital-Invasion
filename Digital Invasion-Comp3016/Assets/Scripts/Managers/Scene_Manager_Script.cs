@@ -16,6 +16,9 @@ public class Scene_Manager_Script : MonoBehaviour
     public GameObject GoodGuy;
     public GameObject BadGuy;
 
+    public GameObject[] weaponsPrefabs;
+    public Sprite[] weaponsIcons;
+
     public void Play()
     {
         int ID = 0;
@@ -95,7 +98,14 @@ public class Scene_Manager_Script : MonoBehaviour
             TurnScript.goodList[locator].armour = 5;
             TurnScript.goodList[locator].armourPiercing = 3;
             TurnScript.goodList[locator].damage = 10;
-    
+
+            GameObject handBone = TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone;
+            Destroy(TurnScript.goodList[locator].weaponModel);
+            TurnScript.goodList[locator].weaponModel = Instantiate(weaponsPrefabs[0], TurnScript.goodList[locator].transform);
+            TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone = handBone;
+            TurnScript.goodList[locator].classIcon.sprite = weaponsIcons[0];
+            TurnScript.goodList[locator].unitClass = "Rifleman";
+            TurnScript.goodList[locator].weaponRange.transform.localScale = new Vector3(10 * 2, 5, 10 * 2);
         }
 
         if (current.value == 1)
@@ -108,17 +118,35 @@ public class Scene_Manager_Script : MonoBehaviour
             TurnScript.goodList[locator].armour = 0;
             TurnScript.goodList[locator].armourPiercing = 0;
             TurnScript.goodList[locator].damage = 10;
+
+
+            GameObject handBone = TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone;
+            Destroy(TurnScript.goodList[locator].weaponModel);
+            TurnScript.goodList[locator].weaponModel = Instantiate(weaponsPrefabs[1], TurnScript.goodList[locator].transform);
+            TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone = handBone;
+            TurnScript.goodList[locator].classIcon.sprite = weaponsIcons[1];
+            TurnScript.goodList[locator].unitClass = "Scout";
+            TurnScript.goodList[locator].weaponRange.transform.localScale = new Vector3(15 * 2, 5, 15 * 2);
         }
         if (current.value == 2)
         {
             //specialist
             TurnScript.goodList[locator].maxDistance = 100;
             TurnScript.goodList[locator].viewDistance = 10;
-            TurnScript.goodList[locator].maxRange = 5;
+            TurnScript.goodList[locator].maxRange = 7;
             TurnScript.goodList[locator].maxHealth = 20;
             TurnScript.goodList[locator].armour = 5;
             TurnScript.goodList[locator].armourPiercing = 0;
             TurnScript.goodList[locator].damage = 15;
+
+
+            GameObject handBone = TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone;
+            Destroy(TurnScript.goodList[locator].weaponModel);
+            TurnScript.goodList[locator].weaponModel = Instantiate(weaponsPrefabs[2], TurnScript.goodList[locator].transform);
+            TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone = handBone;
+            TurnScript.goodList[locator].classIcon.sprite = weaponsIcons[2];
+            TurnScript.goodList[locator].unitClass = "Specialist";
+            TurnScript.goodList[locator].weaponRange.transform.localScale = new Vector3(7 * 2, 5, 7 * 2);
         }
         if (current.value == 3)
         {
@@ -130,6 +158,15 @@ public class Scene_Manager_Script : MonoBehaviour
             TurnScript.goodList[locator].armour = 7;
             TurnScript.goodList[locator].armourPiercing = 5;
             TurnScript.goodList[locator].damage = 10;
+
+
+            GameObject handBone = TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone;
+            Destroy(TurnScript.goodList[locator].weaponModel);
+            TurnScript.goodList[locator].weaponModel = Instantiate(weaponsPrefabs[3], TurnScript.goodList[locator].transform);
+            TurnScript.goodList[locator].weaponModel.GetComponent<Weapon_Controller_Script>().HandBone = handBone;
+            TurnScript.goodList[locator].classIcon.sprite = weaponsIcons[3];
+            TurnScript.goodList[locator].unitClass = "Support";
+            TurnScript.goodList[locator].weaponRange.transform.localScale = new Vector3(10 * 2, 5, 10 * 2);
         }
 
     }

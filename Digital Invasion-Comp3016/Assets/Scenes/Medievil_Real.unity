@@ -2747,7 +2747,7 @@ PrefabInstance:
     - target: {fileID: 8207623891988618573, guid: 75c906e459232a14e8d787c5ce62cc69,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.947521
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 8207623891988618573, guid: 75c906e459232a14e8d787c5ce62cc69,
         type: 3}
@@ -23049,7 +23049,7 @@ PrefabInstance:
     - target: {fileID: 8207623891988618573, guid: 75c906e459232a14e8d787c5ce62cc69,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.097521
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 8207623891988618573, guid: 75c906e459232a14e8d787c5ce62cc69,
         type: 3}
@@ -54901,7 +54901,7 @@ PrefabInstance:
     - target: {fileID: 340591186742742091, guid: f4d8e8f0c867414409f734cdbd27174b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.63
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 340591186742742091, guid: f4d8e8f0c867414409f734cdbd27174b,
         type: 3}
@@ -67810,6 +67810,16 @@ MonoBehaviour:
   TurnScript: {fileID: 8524052154264552529}
   GoodGuy: {fileID: 6087263342317415138, guid: cdbf4db6190e4344388fdfe15c7b16b7, type: 3}
   BadGuy: {fileID: 3365535220338891202, guid: 564b12f16b0e4094a82f09bf48913b44, type: 3}
+  weaponsPrefabs:
+  - {fileID: 6032470083864398189, guid: dccf5f4584417e9449ef5f8360333413, type: 3}
+  - {fileID: 773582171059119947, guid: c74900de35b53c64ea480416dc8982b2, type: 3}
+  - {fileID: 4799032428235173368, guid: 62a58838130ea684195d5e9edccb400a, type: 3}
+  - {fileID: 5396211618396043682, guid: 53906b5ed0a93614c9f3653b9b67ac58, type: 3}
+  weaponsIcons:
+  - {fileID: 21300000, guid: 8d2e7297182445148b947b7da5cf35c8, type: 3}
+  - {fileID: 21300000, guid: 1fc80d244091bd942a0b3d7ef051f8e5, type: 3}
+  - {fileID: 21300000, guid: 5c5cd98a3be7a7146b56697ddf79da6d, type: 3}
+  - {fileID: 21300000, guid: dd59b874db7e4a74da357d67b33c7ca6, type: 3}
 --- !u!1001 &1820399447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71065,7 +71075,7 @@ PrefabInstance:
     - target: {fileID: 8207623891988618573, guid: 75c906e459232a14e8d787c5ce62cc69,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.697521
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8207623891988618573, guid: 75c906e459232a14e8d787c5ce62cc69,
         type: 3}
